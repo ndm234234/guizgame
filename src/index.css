@@ -1,13 +1,27 @@
 body {
-  margin: 0;
+  /* margin: 0; */
+
+  font-family: arial, sans-serif !important ;
+/*  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  counter-reset:section;
+  text-align:center;
+  background: #74b6db !important;
+
+  margin: 0;
+  height: 100vh !important; /* Занимает всю высоту окна */
+  display: flex !important;
+  flex-direction: column !important; /* Располагаем div-ы в колонку */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: arial, sans-serif;
+
+/*  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;*/
 }

@@ -1,0 +1,45 @@
+.quiz-over-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quiz-over-modal .content {
+    background-color: darkcyan;
+    padding: 30px;
+    border-radius: 10px;
+    flex-basis: 700px;
+    max-width: 700px;
+    color: #ffffff;
+    text-align: left;
+  }
+  
+  .quiz-over-modal .content h1 {
+    text-align: center;
+    font-size: 36px;
+    margin: 0 0 20px;
+  }
+  
+  .quiz-over-modal .content button {
+    padding: 15px 50px;
+    border: none;
+    background-color: #ff9800;
+    transition: all .2s ease-in-out;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ffffff;
+  
+    margin:auto;
+    display:block;
+  }
+  
+  .quiz-over-modal .content button:hover {
+    background-color: #ff9900e5;
+  }
+  
