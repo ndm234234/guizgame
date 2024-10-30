@@ -31,6 +31,8 @@ function CommandsSplash(props) {
         }
     }
 
+
+    
     function onRemoveCommand(id) {
         const index = commands.findIndex(i => i.id == id);
         if (index != -1) {
