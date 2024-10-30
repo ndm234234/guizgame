@@ -52,7 +52,7 @@
 }
   
 .containerCommands span{
-    margin-bottom:22px; 
+/*    margin-bottom:22px; */
     display:inline-block;
 }
   
@@ -85,6 +85,8 @@
 .divCrossImageButton {
   display: inline-block;
   align-items: center;
+  height: 44px;
+  position: relative;
 }
   
 .crossImageButton {
@@ -96,11 +98,8 @@
   align-items: center;
   justify-content: center;
 
-  position:relative;
-  top: -14px;
-
-  width: 44px;
-  height:44px;
+  position: absolute;
+  top: 14px;
 }
   
 input{

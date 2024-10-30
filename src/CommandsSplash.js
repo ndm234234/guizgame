@@ -3,6 +3,8 @@ import { flushSync } from 'react-dom';
 
 import {uuid, deepCopyArray} from './tools.js'
 
+import CloseButton from 'react-bootstrap/CloseButton';
+
 import './CommandsSplash.css';
 
 function CommandsSplash(props) {
@@ -69,7 +71,7 @@ function CommandsSplash(props) {
                             onChange={(e) => setCommandName(index, e.target.value)}
                             ></input>
                             <div className="divCrossImageButton" >
-                                <img src="cross.jpg" className="crossImageButton" alt="icon"
+                            <CloseButton className="crossImageButton"
                                 onClick={() => {
                                 if (commands.length > 1){ 
                                     onRemoveCommand(item.id);
