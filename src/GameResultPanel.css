@@ -16,13 +16,14 @@
     flex-basis: 700px;
     max-width: 700px;
     color: #ffffff;
-    text-align: left;
+    /*text-align: left;*/
   }
   
   .quiz-over-modal .content h1 {
     text-align: center;
     font-size: 36px;
     margin: 0 0 20px;
+    font-weight: bold;
   }
   
   .quiz-over-modal .content button {

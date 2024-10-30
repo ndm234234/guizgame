@@ -20,10 +20,10 @@ function GameResultPanel(props) {
             <div class="quiz-over-modal">
                 <div class="content">
                     <h1>Итоги</h1>
-                    <p><span id="info">{result.map((item) => {
+                    <p><span id="info">{result.length > 0 ? result.map((item, index) => {
                         return (
-                            <p>{item}</p>)}
-                        )}</span></p>
+                            <p>{index + 1}. Команда '<b>{item.command}</b>' ответила на {item.correctAnswers} вопросов из {item.questions} на {item.score} баллов!</p>)}
+                        ) : "Никто не играл:("}</span></p>
                     <button id="btn-try-again" onClick={props.tryAgain}>Попробывать снова</button>
                 </div>
             </div>

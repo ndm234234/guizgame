@@ -39,6 +39,7 @@ function App() {
     setCurrentCommand(0);
     setQuiz(data);
     setQueries(toQueries(data))
+    document.title = "Викторина (" + data.title + ")";
     modalRef.current.reload();
   }
 
@@ -57,7 +58,7 @@ function App() {
         setSelectedRandomQuery(selectedRandomQueryItem);
   
         if (copyQueries.get(cat).get(scoreValue).size == 0) {
-          copyQueries.get(cat).delete(scoreValue);
+            copyQueries.get(cat).delete(scoreValue);
         }
         if (copyQueries.get(cat).size == 0) {
           copyQueries.delete(cat);

@@ -14,10 +14,12 @@ function CommandsSplash(props) {
     const onCreateCommand = () => {
         flushSync(() =>{
             var array = commands.slice();
-            let currentCommandCounter = Math.max(commandCounter + 1, array.length + 1);
-            array.push({ name: "Команда " + currentCommandCounter.toString(), id : uuid()});
-            setCommands(array);
-            setCommandCounter(currentCommandCounter);
+            if (array.length < 9) {
+                let currentCommandCounter = Math.max(commandCounter + 1, array.length + 1);
+                array.push({ name: "Команда " + currentCommandCounter.toString(), id : uuid()});
+                setCommands(array);
+                setCommandCounter(currentCommandCounter);
+            }
         });
         if (alertRef && alertRef.current) {
             alertRef.current.scrollTop = alertRef.current.scrollHeight;
@@ -81,7 +83,7 @@ function CommandsSplash(props) {
         </div>
         <div className="containerCommands_buttons">
         <input className="submit" id="add_command" value="Добавить команду" type="button" onClick={onCreateCommand}/>
-        <input className="submit" id="start_command"value="Начать" type="button" 
+        <input className="submit" id="start_command"value="Начать игру" type="button" 
                onClick={() => {props.onStart(commands.map((item) => item.name))}}/>
         </div>
     </div>

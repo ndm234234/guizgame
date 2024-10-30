@@ -88,9 +88,9 @@ export function sortedResult(commands) {
     for (let cmd of commands) {
       if (cmd.questions > 0) {
         yourListMaps.push( { command : cmd.name, 
-                            questions : cmd.questions, 
-                            correctAnswers : cmd.correctAnswers,
-                            score : cmd.score });
+                             questions : cmd.questions, 
+                             correctAnswers : cmd.correctAnswers,
+                             score : cmd.score });
       }
     }
   
@@ -98,21 +98,7 @@ export function sortedResult(commands) {
         return b.score - a.score;
     });
 
-    var results = [];
-
-    var index = 0;
-    for (let cmd of yourListMaps) {
-      var str = ++index + ". Команда <strong>\"" + cmd.command + 
-                "\"</strong> ответила на " + cmd.correctAnswers + " вопросов из " + cmd.questions + 
-                " на " + cmd.score + " баллов!";
-  
-      results.push(str);
-    }
-    if (results.length == 0) {
-
-        results.push("Никто не играл:(");
-    } 
-    return results;
+    return yourListMaps;
 }
 
 export function uuid() {

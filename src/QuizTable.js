@@ -17,27 +17,25 @@ function QuizTable(props) {
     }
     else 
     return (
-        <div className="quizTableContainer">
-            <table id = "quizTable">
-                <tbody>
-                {[...props.queries].map((key, index)  => {
-                    return <tr key={index}>
-                               <td>{key[0]}</td>
-                               {tableColumns.map((c) => {
-                                if (key[1].has(c)) {
-                                    return <td key={key[0]}
-                                            onClick={()=> {props.selectQuestion(key[0], c) }}
-                                            >{c} ({key[1].get(c).size.toString()})</td>
-                                } else 
-                                {
-                                    return <td>-</td>
-                                }
-                               })}
-                            </tr>;
-                })}
-                </tbody>
-            </table>
-        </div>
+    <table id = "quizTable">
+        <tbody>
+        {[...props.queries].map((key, index)  => {
+            return <tr key={index}>
+                        <td>{key[0]}</td>
+                        {tableColumns.map((c) => {
+                        if (key[1].has(c)) {
+                            return <td key={key[0]}
+                                    onClick={()=> {props.selectQuestion(key[0], c) }}
+                                    >{c} ({key[1].get(c).size.toString()})</td>
+                        } else 
+                        {
+                            return <td>-</td>
+                        }
+                        })}
+                    </tr>;
+        })}
+        </tbody>
+    </table>
     );
 }
 

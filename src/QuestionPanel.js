@@ -19,7 +19,8 @@ function QuestionPanel(props) {
     useEffect(() => {
         setLabelStates(new Map());
         setAnswers(new Set());
-        setIgnoreAnswer(false)
+        setIgnoreAnswer(false);
+        setNextButtonEnable(false);
       }, [props.selectedRandomQuery]);
     
     function setState(id, isCorrect) {
@@ -43,6 +44,7 @@ function QuestionPanel(props) {
 
         })
         setLabelStates(newMap);
+        setNextButtonEnable(false);
 
         setTimeout(() => {
             setNextButtonEnable(true);
@@ -63,7 +65,7 @@ function QuestionPanel(props) {
     }
     else 
     return (
-        <div className="question_panel_all" >
+        <div className="question_panel_all">
             <div className="question_panel_info">
             <span id="question_info">Вопрос {props.questionNumber} из {props.totalQuestions}</span>
             <span id="question_score">{props.selectedRandomQuery.score} баллов</span>

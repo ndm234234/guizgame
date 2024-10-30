@@ -4,6 +4,7 @@ import { flushSync } from 'react-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import './BottomPanel.css';
 
@@ -27,15 +28,12 @@ function BottomPanel(props) {
         <div className="bottom_commands">
         {props.visible && <div className="game_menu_group1">
             <input type="file" id="load_file"  accept=".txt,.json" style={{ display: 'none' }} onChange={onLoad}/>
-            <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-basic">Игра</Dropdown.Toggle>
-              <Dropdown.Menu>
-              <Dropdown.Item onClick={props.tryAgain}>Новая</Dropdown.Item>
-              <Dropdown.Item onClick={() => { document.getElementById('load_file').click(); }}>Загрузить</Dropdown.Item>
-              <Dropdown.Item onClick={() => { props.OnForceFinish(true)}}>Завершить</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-
+            <DropdownButton id="dropdown-item-button" title="Игра">
+              <Dropdown.Item as="button" onClick={props.tryAgain}>Новая</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item as="button" onClick={() => { document.getElementById('load_file').click(); }}>Загрузить</Dropdown.Item>
+              <Dropdown.Item as="button" onClick={() => { props.OnForceFinish(true)}}>Завершить</Dropdown.Item>
+          </DropdownButton>
         </div>
         }
         <div className="bottom_commands_info">
