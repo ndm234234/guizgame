@@ -114,3 +114,10 @@ export function sortedResult(commands) {
     } 
     return results;
 }
+
+export function uuid() {
+    const url = URL.createObjectURL(new Blob())
+    const [id] = url.toString().split('/').reverse()
+    URL.revokeObjectURL(url)
+    return id
+  }

@@ -11,7 +11,7 @@ import './GameResultPanel.css';
 
 function GameResultPanel(props) {
 
-     if (!props.visible) {
+    if (!props.visible) {
         return null;
     }
     else {

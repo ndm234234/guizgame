@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { flushSync } from 'react-dom';
 
-import {toQueries, toTableColumns, shuffleArray, deepCopyArray} from './tools.js'
+import {uuid, deepCopyArray} from './tools.js'
 
 import './CommandsSplash.css';
 
@@ -10,13 +10,6 @@ function CommandsSplash(props) {
     const [commandCounter, setCommandCounter] = useState(0)
 
     const alertRef = useRef(null);
-
-    function uuid() {
-        const url = URL.createObjectURL(new Blob())
-        const [id] = url.toString().split('/').reverse()
-        URL.revokeObjectURL(url)
-        return id
-      }
 
     const onCreateCommand = () => {
         flushSync(() =>{
@@ -31,8 +24,6 @@ function CommandsSplash(props) {
         }
     }
 
-
-    
     function onRemoveCommand(id) {
         const index = commands.findIndex(i => i.id == id);
         if (index != -1) {
@@ -42,12 +33,16 @@ function CommandsSplash(props) {
       }
 
     useEffect(() => {
-        var array = new Array();
-        for(let rec of props.commands) {
-            array.push({ name : rec, id : uuid()});
-        }
-        setCommands(array);
+        setCommands(props.commands.map((item) => { return { name : item, id : uuid()}}));
     }, []);
+
+    useEffect(() => {
+        if (props.visible) {
+            if (alertRef && alertRef.current) {
+                alertRef.current.scrollTop = alertRef.current.scrollHeight;
+            }
+        }
+    }, [props.visible] );
 
     function setCommandName(index, name) {
         const copyCommands =  deepCopyArray(commands);
