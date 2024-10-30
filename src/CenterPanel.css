@@ -5,4 +5,5 @@
     flex: 1;
     margin: 10px;
     align-content: space-around;
+    position: relative;
   }

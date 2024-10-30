@@ -5,7 +5,6 @@ import { flushSync } from 'react-dom';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Fade from 'react-bootstrap/Fade';
 
 import QuizTable from './QuizTable.js'
 import QuestionPanel from './QuestionPanel.js'
@@ -65,37 +64,21 @@ const CenterPanel = forwardRef((props, ref)  => {
     else 
     return (
         <><div ref={modalRef}> 
-        <Fade in={showQuizTable}>
-            <div>
-            <QuizTable visible={showQuizTable}  quiz={props.quiz} queries={props.queries} 
-                                selectQuestion={selectQuestion}></QuizTable>
-            </div>
-        </Fade>
-        <Fade in={showQuestion}>
-            <div>
-            <QuestionPanel visible={showQuestion} selectedRandomQuery={props.selectedRandomQuery}
-                        questionNumber={props.questionNumber}
-                        totalQuestions={props.totalQuestions}
-                        showAnswers={showAnswers}
-                        onQuestionResult = {onQuestionResult}/>
-            </div>
-        </Fade>
-        <Fade in={showAnswer}>
-            <div>
-                <AnswerPanel visible={showAnswer} 
-                            selectedRandomQuery={props.selectedRandomQuery} onClose={() => {
-                            setShowAnswer(false);
-                            setShowQuestion(true);
-                } }/>
-            </div>
-        </Fade>
-        <Fade in={showGameResult}>
-            <div>
-            <GameResultPanel visible={showGameResult} 
-                            commands={props.commands}
-                            tryAgain={props.tryAgain}/>
-            </div>
-        </Fade>
+        <QuizTable visible={showQuizTable}  quiz={props.quiz} queries={props.queries} 
+                            selectQuestion={selectQuestion}></QuizTable>
+        <QuestionPanel visible={showQuestion} selectedRandomQuery={props.selectedRandomQuery}
+                    questionNumber={props.questionNumber}
+                    totalQuestions={props.totalQuestions}
+                    showAnswers={showAnswers}
+                    onQuestionResult = {onQuestionResult}/>
+        <AnswerPanel visible={showAnswer} 
+                        selectedRandomQuery={props.selectedRandomQuery} onClose={() => {
+                        setShowAnswer(false);
+                        setShowQuestion(true);
+        } }/>
+        <GameResultPanel visible={showGameResult} 
+                        commands={props.commands}
+                        tryAgain={props.tryAgain}/>
         </div>
         </>
     );
