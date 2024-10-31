@@ -1,9 +1,10 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { flushSync } from 'react-dom';
-
+import Modal from 'react-bootstrap/Modal';
 import {uuid, deepCopyArray} from './tools.js'
 
 import CloseButton from 'react-bootstrap/CloseButton';
+import Button from 'react-bootstrap/Button';
 
 import './CommandsSplash.css';
 
@@ -59,7 +60,12 @@ function CommandsSplash(props) {
             return null;
     }
     else return(
-        <div className="containerCommands">
+        <div
+        className="modal show"
+        style={{ display: 'block', position: 'initial' }}
+      >
+        <Modal.Dialog centered>
+            <div className="containerCommands">
         <h1>Введите названия команд</h1>
         <div className="containerCommands_commands">
         <form action="" id="join-us">
@@ -84,10 +90,11 @@ function CommandsSplash(props) {
         </form>
         </div>
         <div className="containerCommands_buttons">
-        <input className="submit" id="add_command" value="Добавить команду" type="button" onClick={onCreateCommand}/>
-        <input className="submit" id="start_command"value="Начать игру" type="button" 
-               onClick={() => {props.onStart(commands.map((item) => item.name))}}/>
+        <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
+        <Button variant="outline-light" onClick={() => {props.onStart(commands.map((item) => item.name))}}>Начать игру</Button>{' '}
         </div>
+        </div>
+    </Modal.Dialog>
     </div>
   );
 }

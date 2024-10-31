@@ -11,7 +11,7 @@
   
   .quiz-over-modal .content {
     background-color: darkcyan;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     flex-basis: 700px;
     max-width: 700px;
@@ -25,7 +25,7 @@
     margin: 0 0 20px;
     font-weight: bold;
   }
-  
+  /*
   .quiz-over-modal .content button {
     padding: 15px 50px;
     border: none;
@@ -43,4 +43,4 @@
   .quiz-over-modal .content button:hover {
     background-color: #ff9900e5;
   }
-  
+  */

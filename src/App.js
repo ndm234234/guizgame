@@ -25,6 +25,7 @@ function App() {
   const [queries, setQueries] = useState(new Map())
   const [selectedRandomQuery, setSelectedRandomQuery] = useState(null)
   const [questionNumber, setQuestionNumber] = useState(0)
+  const [progress, setProgress] = useState(0)
 
   const modalRef = useRef();
 
@@ -39,6 +40,8 @@ function App() {
     setCurrentCommand(0);
     setQuiz(data);
     setQueries(toQueries(data))
+    setQuestionNumber(0);
+    setProgress(0);
     document.title = "Викторина (" + data.title + ")";
     modalRef.current.reload();
   }
@@ -83,6 +86,9 @@ function App() {
     }
     setCommands(copyCommands)
 
+    const total = quiz != null ? quiz.items.length : 0;
+    setProgress(total > 0 ? questionNumber * 100 / total : 0)
+
     if (queries.size == 0) {
       setCurrentCommand(-1);
       return;
@@ -103,7 +109,11 @@ function App() {
       <CommandsSplash visible={commandsSplashVisible} 
                       commands={commandNames} 
                       onStart={onStart}/>
-      <TopPanel visible={!commandsSplashVisible} title={quiz != null ? quiz.title : ""} commands={commands} currentCommand={currentCommand} onStart={onStart}/>
+      <TopPanel visible={!commandsSplashVisible} title={quiz != null ? quiz.title : ""} 
+                progress={progress}
+                commands={commands} 
+                currentCommand={currentCommand} 
+                onStart={onStart}/>
       <div className="center_panel">
       <CenterPanel ref={modalRef} 
                    visible={!commandsSplashVisible} 

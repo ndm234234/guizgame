@@ -85,8 +85,8 @@ function QuestionPanel(props) {
             })}
         </div>
         <div id = "quizAnsButtons">
-            <input className="submit" id="button_show_answer" type="button" value="Показать ответ" onClick={showAnswers}/>
-            <input className={nextButtonEnable ? "submit" : "submit disable"} id="button_next" type="button" value="Далее" onClick={onQuestionResult}/>
+            <Button variant="outline-light" onClick={showAnswers}>Показать ответ</Button>
+            <Button variant="outline-light" disabled ={!nextButtonEnable} onClick={onQuestionResult}>Далее</Button>
         </div>
         </div>
         </div>

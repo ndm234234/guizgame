@@ -1,6 +1,9 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { flushSync } from 'react-dom';
 
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Fade from 'react-bootstrap/Fade';
+
 import './TopPanel.css';
 
 function TopPanel(props) {
@@ -27,6 +30,9 @@ function TopPanel(props) {
                     )
                 })}
             </div>
+        <Fade in={props.progress > 0}>
+            <ProgressBar now={props.progress}/>
+        </Fade>
         </div>
     );
 }

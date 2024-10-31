@@ -13,13 +13,13 @@ function AnswerPanel(props) {
     }
     else 
     return (
-     <div class="question_panel_data_information_div">
-        {props.selectedRandomQuery.info_img != null ? <img src={props.selectedRandomQuery.info_img} alt="image" class="image_src" id="image_src"/> : null}
-            <div class="question_panel_data_button1">
-            <textarea class="question_panel_text_area" id="question_panel_data_area" readonly="">
+     <div class="answer_panel_data">
+        {props.selectedRandomQuery.info_img != null ? <img src={props.selectedRandomQuery.info_img} alt="image" class="answer_panel_data_image"/> : null}
+            <div class="answer_panel_data_info">
+            <textarea class="answer_panel_data_info_text_area" readonly="">
                 {props.selectedRandomQuery.info != null ? props.selectedRandomQuery.info : "Внесите дополнительную информацию о вопросе."}</textarea>
-            <div class="question_panel_data_button_area">
-                <input class="submit" id="question_panel_data_information_button" value="Закрыть" type="button" onClick={props.onClose}/>
+            <div class="answer_panel_data_info_bottom_panel">
+            <Button variant="outline-light" onClick={props.onClose}>Закрыть</Button>
                 </div>
             </div>
       </div>

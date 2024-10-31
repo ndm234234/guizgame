@@ -24,7 +24,7 @@ function GameResultPanel(props) {
                         return (
                             <p>{index + 1}. Команда '<b>{item.command}</b>' ответила на {item.correctAnswers} вопросов из {item.questions} на {item.score} баллов!</p>)}
                         ) : "Никто не играл:("}</span></p>
-                    <button id="btn-try-again" onClick={props.tryAgain}>Попробывать снова</button>
+                        <Button variant="outline-light" onClick={props.tryAgain}>Попробывать снова</Button>
                 </div>
             </div>
         );

@@ -28,7 +28,7 @@ function BottomPanel(props) {
         <div className="bottom_commands">
         {props.visible && <div className="game_menu_group1">
             <input type="file" id="load_file"  accept=".txt,.json" style={{ display: 'none' }} onChange={onLoad}/>
-            <DropdownButton id="dropdown-item-button" title="Игра">
+            <DropdownButton variant="outline-light" id="dropdown-item-button" title="Игра">
               <Dropdown.Item as="button" onClick={props.tryAgain}>Новая</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item as="button" onClick={() => { document.getElementById('load_file').click(); }}>Загрузить</Dropdown.Item>
