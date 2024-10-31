@@ -5,6 +5,7 @@ import {uuid, deepCopyArray} from './tools.js'
 
 import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import './CommandsSplash.css';
 
@@ -64,37 +65,39 @@ function CommandsSplash(props) {
         className="modal show"
         style={{ display: 'block', position: 'initial' }}
       >
-        <Modal.Dialog centered>
+        <Modal.Dialog centered className="modal-fixed_width">
+        <Modal.Header className="modal-header-custom modal-content-custom">
+          <Modal.Title>Введите названия команд</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modal-content-custom"> 
             <div className="containerCommands">
-        <h1>Введите названия команд</h1>
-        <div className="containerCommands_commands">
-        <form action="" id="join-us">
+            <form action="" className="form-commands">
             <div className="fields" id="fields" ref={alertRef}>
-                {commands.map((item, index) => {
-                    return (
-                        <span key={item.id}> 
-                            <input type="text" defaultValue={item.name}
-                            onChange={(e) => setCommandName(index, e.target.value)}
-                            ></input>
-                            <div className="divCrossImageButton" >
-                            <CloseButton className="crossImageButton"
-                                onClick={() => {
-                                if (commands.length > 1){ 
-                                    onRemoveCommand(item.id);
-                                }}}/>
-                            </div>
-                    </span>
-                    )
-                })}
-            </div>
-        </form>
-        </div>
-        <div className="containerCommands_buttons">
-        <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
-        <Button variant="outline-light" onClick={() => {props.onStart(commands.map((item) => item.name))}}>Начать игру</Button>{' '}
-        </div>
-        </div>
-    </Modal.Dialog>
+                    {commands.map((item, index) => {
+                        return (
+                            <span key={item.id}> 
+                                <input type="text" defaultValue={item.name}
+                                onChange={(e) => setCommandName(index, e.target.value)}
+                                ></input>
+                                <div className="divCrossImageButton" >
+                                <CloseButton className="crossImageButton"
+                                    onClick={() => {
+                                    if (commands.length > 1){ 
+                                        onRemoveCommand(item.id);
+                                    }}}/>
+                                </div>
+                            </span>
+                        )
+                    })}
+                </div>
+                </form>
+                </div>
+        </Modal.Body>
+        <Modal.Footer centered className="modal-content-custom">
+            <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
+            <Button variant="outline-light" onClick={() => {props.onStart(commands.map((item) => item.name))}}>Начать игру</Button>{' '}
+        </Modal.Footer>
+      </Modal.Dialog>
     </div>
   );
 }
