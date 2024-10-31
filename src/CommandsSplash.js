@@ -87,9 +87,9 @@ function CommandsSplash(props) {
         <Modal.Footer centered className="modal-content-custom">
             <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
             <Button variant="outline-light" onClick={() => {
-                const names = commands.filter((item) => item.name.length > 0).map((item) => item.name);
-                if (names.length > 0) {
-                    props.onStart(names);
+                const isEmpty = commands.filter((item) => item.name.length == 0).length > 0;
+                if (!isEmpty) {
+                    props.onStart(commands.map((item) => item.name));
                 }
                 }}>Начать игру</Button>{' '}
         </Modal.Footer>
