@@ -3,9 +3,11 @@ import { flushSync } from 'react-dom';
 import Modal from 'react-bootstrap/Modal';
 import {uuid, deepCopyArray} from './tools.js'
 
+import Form from 'react-bootstrap/Form';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Col from 'react-bootstrap/Col';
 
 import './CommandsSplash.css';
 
@@ -61,44 +63,37 @@ function CommandsSplash(props) {
             return null;
     }
     else return(
-        <div
-        className="modal show"
-        style={{ display: 'block', position: 'initial' }}
-      >
-        <Modal.Dialog centered className="modal-fixed_width">
+    <Modal show centered className="modal-fixed_width">
         <Modal.Header className="modal-header-custom modal-content-custom">
           <Modal.Title>Введите названия команд</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-content-custom"> 
-            <div className="containerCommands">
-            <form action="" className="form-commands">
             <div className="fields" id="fields" ref={alertRef}>
                     {commands.map((item, index) => {
-                        return (
-                            <span key={item.id}> 
-                                <input type="text" defaultValue={item.name}
-                                onChange={(e) => setCommandName(index, e.target.value)}
-                                ></input>
-                                <div className="divCrossImageButton" >
-                                <CloseButton className="crossImageButton"
-                                    onClick={() => {
-                                    if (commands.length > 1){ 
-                                        onRemoveCommand(item.id);
-                                    }}}/>
+                            return (
+                                <div className="input-row" key={item.id}> 
+                                    <Form.Control isInvalid={item.name.length == 0} placeholder="Введите название команды"  defaultValue={item.name} required 
+                                        onChange={(e) => setCommandName(index, e.target.value)}
+                                    />
+                                    <CloseButton className="closeButton" onClick={() => {
+                                            if (commands.length > 1) { 
+                                                onRemoveCommand(item.id);
+                                            }}} />
                                 </div>
-                            </span>
                         )
                     })}
-                </div>
-                </form>
-                </div>
+            </div>
         </Modal.Body>
         <Modal.Footer centered className="modal-content-custom">
             <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
-            <Button variant="outline-light" onClick={() => {props.onStart(commands.map((item) => item.name))}}>Начать игру</Button>{' '}
+            <Button variant="outline-light" onClick={() => {
+                const names = commands.filter((item) => item.name.length > 0).map((item) => item.name);
+                if (names.length > 0) {
+                    props.onStart(names);
+                }
+                }}>Начать игру</Button>{' '}
         </Modal.Footer>
-      </Modal.Dialog>
-    </div>
+    </Modal>
   );
 }
 

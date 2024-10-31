@@ -18,23 +18,20 @@ function GameResultPanel(props) {
     else {
         const result = sortedResult(props.commands);
         return (
-        <div className="modal show" style={{ display: 'block', position: 'initial' }}>
-            <Modal.Dialog centered className="game-result-panel-width">
-                <Modal.Header className="modal-header-custom modal-content-custom">
-                    <Modal.Title>Итоги</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="modal-content-custom"> 
-                    <p><span id="info">{result.length > 0 ? result.map((item, index) => {
-                                return (
-                                    <p>{index + 1}. Команда '<b>{item.command}</b>' ответила на {item.correctAnswers} вопросов из {item.questions} на {item.score} баллов!</p>)}
-                                ) : "Никто не играл:("}</span></p>
-                </Modal.Body>
-                <Modal.Footer centered className="modal-content-custom game-result-panel-centered">
-                    <Button variant="outline-light" onClick={props.tryAgain}>Попробывать снова</Button>
-                </Modal.Footer>
-            </Modal.Dialog>
-    
-        </div>
+        <Modal show centered className="modal-fixed_width" size="md">
+            <Modal.Header className="modal-header-custom modal-content-custom">
+                <Modal.Title>Итоги</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="modal-content-custom"> 
+                <span >{result.length > 0 ? result.map((item, index) => {
+                            return (
+                                <div className="game-result-panel-centered" key={index}>{index + 1}. Команда '<b>{item.command}</b>' ответила на {item.correctAnswers} вопросов из {item.questions} на {item.score} баллов !</div>
+                )}) : <div className="game-result-panel-centered">Никто не играл:(</div>}</span>
+            </Modal.Body>
+            <Modal.Footer centered className="modal-content-custom game-result-panel-centered">
+                <Button variant="outline-light" onClick={props.tryAgain}>Попробывать снова</Button>
+            </Modal.Footer>
+        </Modal>
         );
     }
 }
