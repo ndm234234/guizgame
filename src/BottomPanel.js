@@ -25,7 +25,7 @@ function BottomPanel(props) {
 
     return (
         <>
-        <div className="bottom_commands">
+        <div className="bottom_panel">
         {props.visible && <div className="game_menu_group1">
             <input type="file" id="load_file"  accept=".txt,.json" style={{ display: 'none' }} onChange={onLoad}/>
             <DropdownButton variant="outline-light" id="dropdown-item-button" title="Игра">
@@ -36,7 +36,7 @@ function BottomPanel(props) {
           </DropdownButton>
         </div>
         }
-        <div className="bottom_commands_info">
+        <div className="bottom_panel_info">
               <h1>Школа 1538<br/>Класс 3Э 2024-2025г.<br/>Под руководством<br/>Давыдовой С.В.</h1>
         </div>
       </div>

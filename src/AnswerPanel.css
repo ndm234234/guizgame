@@ -11,19 +11,19 @@
   }
   
 .answer_panel_data_image {
-    object-fit: contain;
-    width:35%;
-    height:auto;
-    margin: 10px;
+  object-fit: contain;
+  width:35%;
+  height:auto;
+  margin: 10px;
 }
   
 .answer_panel_data_info {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
+  flex: 1;
   align-content: space-between;
   margin: 10px;
   justify-content: space-between;
-  flex: 1;
   align-items: center;
   scrollbar-color: darkcyan #4c93ba;
   scrollbar-width :auto;
@@ -31,9 +31,8 @@
 }
   
 .answer_panel_data_info_text_area {
-  font-size: 22px;
+  font-size: 20px;
   font-family: arial, sans-serif;
-  font-weight:500;
   display: flex;
   text-align: left;
   margin-bottom: 10px;
@@ -55,15 +54,22 @@
   .answer_panel_data_info_text_area{
       font-size: 16px;
   }
+  .answer_panel_data {
+    flex-direction: column;
+  }
+  .answer_panel_data_image {
+    width: auto;
+    height: 40%;
+  }
+
+  .answer_panel_data_info {
+    margin-top: 0;
+  }
 }
   
 .answer_panel_data_info_bottom_panel {
   display: flex;
-    flex-direction: row;
-    /* align-items: stretch; */
-    /* align-content: stretch; */
-    /* flex-wrap: nowrap; */
-    width: 100%;
-    /* margin-right: 0; */
-    justify-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
 }

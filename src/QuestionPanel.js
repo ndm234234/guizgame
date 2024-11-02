@@ -65,29 +65,33 @@ function QuestionPanel(props) {
     }
     else 
     return (
-        <div className="question_panel_all">
-            <div className="question_panel_info">
-            <span id="question_info">Вопрос {props.questionNumber} из {props.totalQuestions}</span>
-            <span id="question_score">{props.selectedRandomQuery.score} баллов</span>
-            </div>
         <div className="quizWrap">
-        <div id ="quizQnCategory">{props.selectedRandomQuery.category}</div>
-        <div id ="quizQn">{props.selectedRandomQuery.query}</div>
-        <div id = "quizAns">
+        <div className="quizWrap_header">
+            <span className="quizWrap_header_info">Вопрос {props.questionNumber} из {props.totalQuestions}</span>
+            <span className="quizWrap_header_score">{props.selectedRandomQuery.score} баллов</span>
+            </div>
+        <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
+        <div className="quizWrap_question">{props.selectedRandomQuery.query}</div>
+        <Form className="quizWrap_answers">
             {props.selectedRandomQuery.options.map((item, id) =>{
-                return <label id={id} class={labelStates.has(id) ? labelStates.get(id) : "label_question"}
-                        onClick={() =>{
-                            const isCorrect = props.selectedRandomQuery.answers.has(id);
-                            setState(id, isCorrect);
-                            setNextButtonEnable(true);
-                        }}
-                >{item}</label>
+                
+                return (
+                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
+                                  defaultValue={item}        
+                                  onClick={() =>{
+                                              const isCorrect = props.selectedRandomQuery.answers.has(id);
+                                              setState(id, isCorrect);
+                                              setNextButtonEnable(true);
+                                }}
+                    ></Form.Control>
+                    </Form.Group>
+                )
             })}
-        </div>
-        <div id = "quizAnsButtons">
+        </Form>
+        <div className="quizAnsButtons">
             <Button variant="outline-light" onClick={showAnswers}>Показать ответ</Button>
             <Button variant="outline-light" disabled ={!nextButtonEnable} onClick={onQuestionResult}>Далее</Button>
-        </div>
         </div>
         </div>
     );

@@ -5,7 +5,7 @@
     padding: 10px;
  }
 
-.bottom_commands {
+.bottom_panel {
     display: flex;
     justify-content: space-between; /* Размещаем элементы с пробелами между ними */
     align-items: flex-end; /* Выровнять элементы по нижнему краю */
@@ -19,7 +19,7 @@
     z-index: 0;
 }
   
-.bottom_commands_info {
+.bottom_panel_info {
   text-align: right;
   font-weight : 500;
   font-size: 24px ;
@@ -28,7 +28,7 @@
   margin-left: auto;
 }
 
-.bottom_commands_info h1 {
+.bottom_panel_info h1 {
   text-align: right;
   font-size: 20px;
   font-weight:500;
