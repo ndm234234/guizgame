@@ -17,21 +17,26 @@
     bottom: 0;
     width: 100%;
     z-index: 0;
-  }
+}
   
-  .bottom_commands_info {
-    text-align: right;
-    font-weight : 500;
-    font-size: 24px ;
-    display: flex;
-    justify-content: flex-end;
-    margin-left: auto;
-  }
-  
+.bottom_commands_info {
+  text-align: right;
+  font-weight : 500;
+  font-size: 24px ;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.bottom_commands_info h1 {
+  text-align: right;
+  font-size: 20px;
+  font-weight:500;
+}
+
+@media (max-width: 768px) {
   .bottom_commands_info h1 {
-    text-align: right;
-    font-size: 20px;
-    font-weight:500;
+      font-size: 12px;
   }
-  
+}
   

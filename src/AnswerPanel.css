@@ -50,6 +50,12 @@
   -moz-box-shadow: none;
   box-shadow: none;
 }
+
+@media (max-width: 768px) {
+  .answer_panel_data_info_text_area{
+      font-size: 16px;
+  }
+}
   
 .answer_panel_data_info_bottom_panel {
   display: flex;

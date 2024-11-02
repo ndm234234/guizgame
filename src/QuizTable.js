@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { queries } from "@testing-library/react";
 import {toQueries, toTableColumns} from './tools.js'
+import Table from 'react-bootstrap/Table';
 
 import './QuizTable.css';
 
@@ -17,7 +18,7 @@ function QuizTable(props) {
     }
     else 
     return (
-    <table id = "quizTable">
+        <Table striped bordered hover size="lg" className="quiz_table">
         <tbody>
         {[...props.queries].map((key, index)  => {
             return <tr key={index}>
@@ -35,7 +36,7 @@ function QuizTable(props) {
                     </tr>;
         })}
         </tbody>
-    </table>
+    </Table>
     );
 }
 

@@ -50,6 +50,12 @@
   animation: pulse 0.3s 1;
 }
   
+@media (max-width: 768px) {
+  .command_item {
+      font-size: 14px !important;
+  }
+}
+
 @keyframes pulse {
   0% {
       transform: scale(0.1);
@@ -62,8 +68,7 @@
   }
 }
   
-.command_item .span_command_name
-{ 
+.command_item .span_command_name { 
   float: left;
 }
   
@@ -71,8 +76,7 @@
   float:right;
 }
   
-.command_item .span_custom_info
-{ 
+.command_item .span_custom_info { 
   float: left;
 }
   
