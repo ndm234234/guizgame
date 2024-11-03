@@ -97,4 +97,5 @@
   
 .progress {
   margin: 10px 0;
+  animation: pulse 0.7s 1;
 } 

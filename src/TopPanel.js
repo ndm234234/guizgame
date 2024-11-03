@@ -13,10 +13,7 @@ function TopPanel(props) {
     else return (
         <div className="top_panel">
             <h1><span id="game_title"/>{props.title}</h1>
-            {props.progress > 0 && <Fade in>
-                <ProgressBar now={props.progress}/>
-                </Fade>
-            }
+            <ProgressBar now={props.progress}/>
             <div className="top_commands">
                 {props.commands.map((item, index) => {
                     return (
