@@ -1,4 +1,4 @@
-import  { useEffect, useState, useCallback } from "react";
+import  { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import logo from './logo.svg';
@@ -101,6 +101,27 @@ function App() {
     setCurrentCommand(value);
   }
 
+  function updateCenterPanelScrollBarState() {
+    const scrollableDiv = document.getElementById('center_panel-div');
+    if (scrollableDiv != null) {
+        scrollableDiv.classList.remove('padded'); // Убираем класс, если скроллбара нет
+      // Проверка, необходимо ли добавлять отступ
+      if (scrollableDiv.scrollHeight > scrollableDiv.clientHeight) {
+        scrollableDiv.classList.add('padded'); // Добавляем класс с паддингом
+      }
+      else {
+        scrollableDiv.classList.remove('padded'); // Убираем класс, если скроллбара нет
+      }
+    }
+  }
+
+  useLayoutEffect(() => {
+    updateCenterPanelScrollBarState();
+  }, [selectedRandomQuery, currentCommand]);
+
+  window.onload = updateCenterPanelScrollBarState;
+  window.onresize = updateCenterPanelScrollBarState;
+
   const commandNames = commands.map((item) =>  item.name);
 
   return (
@@ -114,7 +135,7 @@ function App() {
                 commands={commands} 
                 currentCommand={currentCommand} 
                 onStart={onStart}/>
-      <div className="center_panel">
+      <div className="center_panel" id = "center_panel-div">
       <CenterPanel ref={modalRef} 
                    visible={!commandsSplashVisible} 
                    commands={commands}
@@ -127,7 +148,7 @@ function App() {
                    onQuestionResult={onQuestionResult}
                    tryAgain={tryAgain}
                    />
-      </div>
+      </div>             
       <BottomPanel visible={!commandsSplashVisible} onLoad={onLoad}
                    OnForceFinish={() => {
                      setCurrentCommand(-1)

@@ -1,13 +1,15 @@
-
 .center_panel {
-    /*background: red;*/
-    /* border: 1px solid; */
-    flex: 1;
-    margin: 10px;
-    align-content: space-around;
-    position: relative;
-    overflow: auto;
-    scrollbar-color: darkcyan #4c93ba;
-    scrollbar-width: auto;
-    scroll-snap-align: center;
-  }
+  flex: 1;
+  margin: 10px;
+  align-content: space-around;
+  position: relative;
+  overflow: auto;
+  scrollbar-color: darkcyan #4c93ba;
+  scrollbar-width: auto;
+  scroll-snap-align: center;
+  overflow-x: auto;
+}
+
+.center_panel.padded {
+  padding-right: 10px; /* Отступ, когда скроллбар отображается */
+}

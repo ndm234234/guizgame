@@ -3,7 +3,10 @@
   flex-direction: column;
   color: #fff;
   font-size: 16px;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 0px;
 }
   
 .top_panel  h1 {
@@ -21,7 +24,6 @@
 
   color: #fff;
   border-radius: 10px;
-  cursor: pointer;
   width: 100%;
 
   flex-direction: row;
@@ -36,7 +38,6 @@
   color: #ffffff;
   border: none; 
   border-radius: 5px;
-  cursor: pointer;
   text-align: center;
 
   display: flex ;
