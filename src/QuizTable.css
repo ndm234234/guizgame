@@ -1,7 +1,6 @@
 .quiz_table {
     border-collapse: collapse;
     width: 100%;
-    border-collapse: collapse;
  /*  box-shadow: 0 0 20px rgba(0,0,0,0.1); */
     cursor: pointer;
     font-size: 24px;
@@ -24,6 +23,7 @@ th, td {
     text-align: center;
     vertical-align: middle;
     background: #74b6db !important;
+    color: #fff !important;
 }
 /*
 th {

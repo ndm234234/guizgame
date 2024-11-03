@@ -49,7 +49,7 @@ function QuestionPanel(props) {
         setTimeout(() => {
             setNextButtonEnable(true);
             props.showAnswers();
-        }, 500);
+        }, 2000);
     }
 
     function onQuestionResult() {
