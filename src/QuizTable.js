@@ -18,7 +18,7 @@ function QuizTable(props) {
     }
     else 
     return (
-        <Table striped bordered hover size="lg" className="quiz_table">
+        <Table striped="columns" bordered hover size="lg" className="quiz_table">
         <tbody>
         {[...props.queries].map((key, index)  => {
             return <tr key={index}>
@@ -36,7 +36,7 @@ function QuizTable(props) {
                     </tr>;
         })}
         </tbody>
-    </Table>
+        </Table>
     );
 }
 

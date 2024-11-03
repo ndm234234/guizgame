@@ -35,7 +35,7 @@
 }
 
 @media (max-width: 768px) {
-  .bottom_commands_info h1 {
+  .bottom_panel_info h1 {
       font-size: 12px;
   }
 }

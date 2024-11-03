@@ -6,4 +6,8 @@
     margin: 10px;
     align-content: space-around;
     position: relative;
+    overflow: auto;
+    scrollbar-color: darkcyan #4c93ba;
+    scrollbar-width: auto;
+    scroll-snap-align: center;
   }

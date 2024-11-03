@@ -1,70 +1,37 @@
 .quiz_table {
     border-collapse: collapse;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    width: 100%;
+    border-collapse: collapse;
+ /*  box-shadow: 0 0 20px rgba(0,0,0,0.1); */
     cursor: pointer;
     font-size: 24px;
-    width: 100%;
-    height: 100%;
 
-/*    word-break: break-all; */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     > :not(caption) > * > * {
         color: #fff;
     }
 }
 
-@media (max-width: 768px) {
-    .quiz_table {
-        font-size: 14px;
-        /*
-        line-height: 0.5;
-        */
-        margin-bottom: 1em;
-    }
-}
-
-th,  td {
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
     padding: 10px;
     text-align: center;
     vertical-align: middle;
     background: #74b6db !important;
 }
-  
-th {
-    text-align: left;
-}
-  
-thead {
-    th {
-        background-color: #55608f;
-    }
-}
-
 /*
-tbody {
-    tr {
-        &:hover {
-            background-color: rgba(255,255,255,0.3);
-        }
+th {
+    background-color: #ddd;
+}*/
+
+@media (max-width: 768px) {
+    .quiz_table {
+        font-size: 16px;
     }
-    td {
-        position: relative;
-        &:hover {
-            &:before {
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: -9999px;
-                bottom: -9999px;
-                background-color: rgba(255,255,255,0.2);
-                z-index: -1;
-            }
-        }
+/*
+    .quiz_table td {
+        display: block;
     }
-}
 */
+}
