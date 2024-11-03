@@ -15,12 +15,14 @@ function QuestionPanel(props) {
     const [nextButtonEnable, setNextButtonEnable] = useState(false)
     const [answers, setAnswers] = useState(new Set())
     const [ignoreAnswer, setIgnoreAnswer] = useState(false)
+    const [answerWasShown, setAnswerWasShown] = useState(false)
 
     useEffect(() => {
         setLabelStates(new Map());
         setAnswers(new Set());
         setIgnoreAnswer(false);
         setNextButtonEnable(false);
+        setAnswerWasShown(false);
       }, [props.selectedRandomQuery]);
     
     function setState(id, isCorrect) {
@@ -46,10 +48,18 @@ function QuestionPanel(props) {
         setLabelStates(newMap);
         setNextButtonEnable(false);
 
-        setTimeout(() => {
+        function show() {
             setNextButtonEnable(true);
             props.showAnswers();
-        }, 2000);
+        }
+ 
+        if (answerWasShown) {
+            show();
+        } else {
+            setTimeout(() => { show(); }, 2000);
+        }
+
+        setAnswerWasShown(true);
     }
 
     function onQuestionResult() {

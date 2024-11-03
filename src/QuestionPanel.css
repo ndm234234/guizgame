@@ -6,6 +6,8 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 60%;
+  animation: fadeIn 0.3s 1;
+  opacity: 1;
 }
 
 .quizWrap_header {

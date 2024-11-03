@@ -77,14 +77,16 @@ const CenterPanel = forwardRef((props, ref)  => {
                        totalQuestions={props.totalQuestions}
                        showAnswers={showAnswers}
                        onQuestionResult={onQuestionResult} />
-        <AnswerPanel visible={showAnswer}
-                     selectedRandomQuery={props.selectedRandomQuery} 
+        {showAnswer && <AnswerPanel 
+                     query={props.selectedRandomQuery} 
                      onClose={() => {
                           setShowAnswer(false);
                           setShowQuestion(true);
-                      } } /><GameResultPanel visible={showGameResult}
-                     commands={props.commands}
-                     tryAgain={props.tryAgain} />
+                      } } />
+        }
+        <GameResultPanel visible={showGameResult}
+                         commands={props.commands}
+                         tryAgain={props.tryAgain} />
         </>
     );
 });

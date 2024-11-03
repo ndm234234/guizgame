@@ -5,6 +5,9 @@
     cursor: pointer;
     font-size: 24px;
 
+    animation: fadeIn 0.3s 1;
+    opacity: 1;
+
     > :not(caption) > * > * {
         color: #fff;
     }

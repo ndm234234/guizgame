@@ -117,7 +117,7 @@ function App() {
 
   useLayoutEffect(() => {
     updateCenterPanelScrollBarState();
-  }, [selectedRandomQuery, currentCommand]);
+  }, [commands, selectedRandomQuery, currentCommand]);
 
   window.onload = updateCenterPanelScrollBarState;
   window.onresize = updateCenterPanelScrollBarState;
