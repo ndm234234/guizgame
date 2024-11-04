@@ -46,19 +46,31 @@ function App() {
     modalRef.current.reload();
   }
 
-  function deepCopyArray(array) {
-    return JSON.parse(JSON.stringify(array));
-}
-
   function selectQuestion(cat, scoreValue) {
     const copyQueries = new Map(queries);
     if (copyQueries.has(cat)) {
       if (copyQueries.get(cat).has(scoreValue)) {
   
- 
         const selectedRandomQueryItem = getRandomItem(copyQueries.get(cat).get(scoreValue).values());
         copyQueries.get(cat).get(scoreValue).delete(selectedRandomQueryItem);
-        setSelectedRandomQuery(selectedRandomQueryItem);
+
+        // random answers order
+        const options = shuffleArray(selectedRandomQueryItem.options.map((item, index) => {
+            return { name: item, correct: selectedRandomQueryItem.answers.has(index) };
+        }));
+
+        const queryItem = 
+        {
+          category : selectedRandomQueryItem.category,
+          score : selectedRandomQueryItem.score,
+          query : selectedRandomQueryItem.query,
+          options : options.map((item) => item.name),
+          answers : new Set(options.map((item, index) => { return { item: item, index: index}}).filter((item) => item.item.correct).map((item) => item.index)),
+          info : selectedRandomQueryItem.info,
+          info_img : selectedRandomQueryItem.info_img
+        };
+
+        setSelectedRandomQuery(queryItem);
   
         if (copyQueries.get(cat).get(scoreValue).size == 0) {
             copyQueries.get(cat).delete(scoreValue);

@@ -53,7 +53,7 @@ function QuestionPanel(props) {
             props.showAnswers();
         }
 
-        if (IsCorrectAnswers() || answerWasShown) {
+        if (IsCorrectAnswers() || answerWasShown || answers.size == props.selectedRandomQuery.options.length) {
             show();
         } else {
             setTimeout(() => { show(); }, 2000);
@@ -90,9 +90,11 @@ function QuestionPanel(props) {
                     <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
                                   defaultValue={item}        
                                   onClick={() =>{
-                                              const isCorrect = props.selectedRandomQuery.answers.has(id);
-                                              setState(id, isCorrect);
-                                              setNextButtonEnable(true);
+                                    if (!answerWasShown){
+                                        const isCorrect = props.selectedRandomQuery.answers.has(id);
+                                        setState(id, isCorrect);
+                                        setNextButtonEnable(true);
+                                    }
                                 }}
                     ></Form.Control>
                     </Form.Group>
