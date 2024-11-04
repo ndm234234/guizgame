@@ -52,8 +52,8 @@ function QuestionPanel(props) {
             setNextButtonEnable(true);
             props.showAnswers();
         }
- 
-        if (answerWasShown) {
+
+        if (IsCorrectAnswers() || answerWasShown) {
             show();
         } else {
             setTimeout(() => { show(); }, 2000);
