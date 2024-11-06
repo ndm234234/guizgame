@@ -29,7 +29,7 @@ function GameResultPanel(props) {
                 )}) : <div className="game-result-panel-centered">Никто не играл:(</div>}</span>
             </Modal.Body>
             <Modal.Footer centered className="modal-content-custom game-result-panel-centered">
-                <Button variant="outline-light" onClick={props.tryAgain}>Попробывать снова</Button>
+                <Button variant="outline-light" onClick={props.tryAgain}>Попробовать снова</Button>
             </Modal.Footer>
         </Modal>
         );
