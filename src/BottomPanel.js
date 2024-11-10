@@ -37,7 +37,7 @@ function BottomPanel(props) {
         </div>
         }
         <div className="bottom_panel_info">
-              <h1>Школа 1538 Класс 3Э<br/>2024-2025г. Под руководством Давыдовой С.В.</h1>
+              <h1>{window.screen.width}x{window.screen.height}<br/>Школа 1538 Класс 3Э<br/>2024-2025г. Под руководством Давыдовой С.В.</h1>
         </div>
       </div>
       </>

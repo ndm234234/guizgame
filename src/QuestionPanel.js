@@ -12,6 +12,7 @@ import './QuestionPanel.css';
 
 function QuestionPanel(props) {
     const [labelStates, setLabelStates] = useState(new Map())
+    const [showAnswerButtonEnable, setShowAnswerButtonEnable] = useState(true)
     const [nextButtonEnable, setNextButtonEnable] = useState(false)
     const [answers, setAnswers] = useState(new Set())
     const [ignoreAnswer, setIgnoreAnswer] = useState(false)
@@ -47,8 +48,10 @@ function QuestionPanel(props) {
         })
         setLabelStates(newMap);
         setNextButtonEnable(false);
+        setShowAnswerButtonEnable(false);
 
         function show() {
+            setShowAnswerButtonEnable(true);
             setNextButtonEnable(true);
             props.showAnswers();
         }
@@ -86,7 +89,7 @@ function QuestionPanel(props) {
             {props.selectedRandomQuery.options.map((item, id) =>{
                 
                 return (
-                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Group className="mb-3">
                     <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
                                   defaultValue={item}        
                                   onClick={() =>{
@@ -102,7 +105,7 @@ function QuestionPanel(props) {
             })}
         </Form>
         <div className="quizAnsButtons">
-            <Button variant="outline-light" onClick={showAnswers}>Показать ответ</Button>
+            <Button variant="outline-light" disabled ={!showAnswerButtonEnable} onClick={showAnswers}>Показать ответ</Button>
             <Button variant="outline-light" disabled ={!nextButtonEnable} onClick={onQuestionResult}>Далее</Button>
         </div>
         </div>
