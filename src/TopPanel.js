@@ -32,16 +32,17 @@ function TopPanel(props) {
 function ScoreItem(props) {
     return (
         <div key={props.index} className = {props.selected}>
-            <div>
+            <div className="command_name_info">
                 <span className = "span_command_name">{props.item.name}</span>
-                <span className = "span_command_score">Счет: {props.item.score}</span>
             </div>
-            {props.item.questions > 0 && 
-                <div>
-                    <span className = "span_custom_info">{"Ответы: правильных " + props.item.correctAnswers + ", неправильных " + 
-                                                        (props.item.questions - props.item.correctAnswers)}</span>
+                <div className="command_name_info_status">
+                    <span className = "span_command_score">Счет: {props.item.score}</span>
+                    <span className = "span_custom_info"
+                                    >{props.item.questions == 0 ? 
+                                    "Нет ответов" :
+                                    `Отвечено ${props.item.correctAnswers} из ${props.item.questions}` 
+                                    }</span>
                 </div> 
-            }
         </div>
     )
 }

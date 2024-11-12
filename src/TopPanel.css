@@ -41,8 +41,8 @@
   text-align: center;
 
   display: flex ;
-  flex-direction: column;
-  justify-content: center; 
+  flex-direction: row;
+  justify-content: space-between; 
   vertical-align: middle;
   width: 100%;
   margin-left: auto;
@@ -54,6 +54,9 @@
 @media (max-width: 768px) {
   .command_item {
       font-size: 14px !important;
+  }
+  .command_item .span_command_name {
+    font-size: 16px !important;
   }
 }
 
@@ -71,14 +74,16 @@
   
 .command_item .span_command_name { 
   float: left;
+  font-size: 24px;
 }
   
 .command_item .span_command_score { 
-  float:right;
+  text-align: right;
 }
   
 .command_item .span_custom_info { 
-  float: left;
+  text-align: right;
+  font-size: 15px;
 }
   
 .command_item.correct {
@@ -99,3 +104,14 @@
   margin: 10px 0;
   animation: pulse 0.7s 1;
 } 
+
+.command_name_info_status {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.command_name_info {
+  display: flex;
+  align-items: center;
+}

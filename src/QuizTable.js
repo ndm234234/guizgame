@@ -9,6 +9,15 @@ import Table from 'react-bootstrap/Table';
 
 import './QuizTable.css';
 
+function sizeStr(value) {
+    if (value > 1) {
+        return " (" + value.toString() + ")";
+    }
+    else {
+        return "";
+    }
+}
+
 function QuizTable(props) {
 
     const tableColumns = props.queries != null ? toTableColumns(props.queries) : new Array();
@@ -27,7 +36,7 @@ function QuizTable(props) {
                         if (key[1].has(c)) {
                             return <td key={key[0]}
                                     onClick={()=> {props.selectQuestion(key[0], c) }}
-                                    >{c} ({key[1].get(c).size.toString()})</td>
+                                    >{c}{sizeStr(key[1].get(c).size)}</td>
                         } else 
                         {
                             return <td>-</td>
