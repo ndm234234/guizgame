@@ -6,7 +6,8 @@ export function getRandomItem(set) {
 export function toQueries(quiz) {
     const queries = new Map();
     for (let i = 0; i < quiz.items.length; i++) {
-        let query = { query : quiz.items[i].question, 
+        let query = { question : quiz.items[i].question, 
+                      questionImage : quiz.items[i].questionImage, 
                       options : quiz.items[i].options,
                       answers : new Set(quiz.items[i].answers),
                       score : quiz.items[i].score,

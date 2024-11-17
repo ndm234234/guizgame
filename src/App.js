@@ -63,7 +63,8 @@ function App() {
         {
           category : selectedRandomQueryItem.category,
           score : selectedRandomQueryItem.score,
-          query : selectedRandomQueryItem.query,
+          question : selectedRandomQueryItem.question,
+          questionImage : selectedRandomQueryItem.questionImage,
           options : options.map((item) => item.name),
           answers : new Set(options.map((item, index) => { return { item: item, index: index}}).filter((item) => item.item.correct).map((item) => item.index)),
           info : selectedRandomQueryItem.info,

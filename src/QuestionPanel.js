@@ -83,27 +83,33 @@ function QuestionPanel(props) {
             <span className="quizWrap_header_info">Вопрос {props.questionNumber} из {props.totalQuestions}</span>
             <span className="quizWrap_header_score">{props.selectedRandomQuery.score} баллов</span>
             </div>
-        <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
-        <div className="quizWrap_question">{props.selectedRandomQuery.query}</div>
-        <Form className="quizWrap_answers">
-            {props.selectedRandomQuery.options.map((item, id) =>{
-                
-                return (
-                    <Form.Group className="mb-3">
-                    <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
-                                  defaultValue={item}        
-                                  onClick={() =>{
-                                    if (!answerWasShown){
-                                        const isCorrect = props.selectedRandomQuery.answers.has(id);
-                                        setState(id, isCorrect);
-                                        setNextButtonEnable(true);
-                                    }
-                                }}
-                    ></Form.Control>
-                    </Form.Group>
-                )
-            })}
-        </Form>
+        <div className="quizWrapBox">
+                { props.selectedRandomQuery.questionImage != null &&
+                    <img src={props.selectedRandomQuery.questionImage} alt="image" className="quizWrapBoxLefImage"/>}
+            <div className="quizWrapBoxRight">
+                <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
+                <div className="quizWrap_question">{props.selectedRandomQuery.question}</div>
+                <Form className="quizWrap_answers">
+                    {props.selectedRandomQuery.options.map((item, id) =>{
+                        
+                        return (
+                            <Form.Group className="mb-3">
+                            <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
+                                        defaultValue={item}        
+                                        onClick={() =>{
+                                            if (!answerWasShown){
+                                                const isCorrect = props.selectedRandomQuery.answers.has(id);
+                                                setState(id, isCorrect);
+                                                setNextButtonEnable(true);
+                                            }
+                                        }}
+                            ></Form.Control>
+                            </Form.Group>
+                        )
+                    })}
+                </Form>
+            </div>
+        </div>
         <div className="quizAnsButtons">
             <Button variant="outline-light" disabled ={!showAnswerButtonEnable} onClick={showAnswers}>Показать ответ</Button>
             <Button variant="outline-light" disabled ={!nextButtonEnable} onClick={onQuestionResult}>Далее</Button>
