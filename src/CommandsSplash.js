@@ -75,7 +75,7 @@ function CommandsSplash(props) {
                                     <Form.Control isInvalid={item.name.length == 0} placeholder="Введите название команды"  defaultValue={item.name} required 
                                         onChange={(e) => setCommandName(index, e.target.value)}
                                     />
-                                    <CloseButton className="closeButton" onClick={() => {
+                                    <CloseButton disabled={commands.length < 2} className="closeButton" onClick={() => {
                                             if (commands.length > 1) { 
                                                 onRemoveCommand(item.id);
                                             }}} />
