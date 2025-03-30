@@ -3,6 +3,7 @@ import { flushSync } from 'react-dom';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image';
 import QuizTable from './QuizTable.js'
 
 import {isEqual} from './tools.js'
@@ -26,9 +27,14 @@ function QuestionPanel(props) {
         setAnswerWasShown(false);
       }, [props.selectedRandomQuery]);
     
-    function setState(id, isCorrect) {
+    function setState(img, id, isCorrect) {
         const newMap = new Map(labelStates);
-        newMap.set(id, isCorrect ? "label_question correct" : "label_question wrong");
+        if (img) {
+            newMap.set(id, isCorrect ? "label_question correct" : "label_question wrong");
+        }
+        else {
+            newMap.set(id, isCorrect ? "label_question_no_img correct" : "label_question_no_img wrong");
+        }
         setLabelStates(newMap);
 
         const newAnswers = new Set(answers);
@@ -43,9 +49,15 @@ function QuestionPanel(props) {
         }
         const newMap = new Map();
         props.selectedRandomQuery.options.map((item, id) => {
-            newMap.set(id, props.selectedRandomQuery.answers.has(id) ? "label_question correct" : "label_question wrong")
-
-        })
+            const imgExist = item.img != null && item.img.length > 0;
+            const isCorrect = props.selectedRandomQuery.answers.has(id);
+            if (imgExist) {
+                newMap.set(id,  isCorrect ? "label_question correct" : "label_question wrong");
+            }
+            else {
+                newMap.set(id, isCorrect ? "label_question_no_img correct" : "label_question_no_img wrong");
+            }
+        });
         setLabelStates(newMap);
         setNextButtonEnable(false);
         setShowAnswerButtonEnable(false);
@@ -84,27 +96,36 @@ function QuestionPanel(props) {
             <span className="quizWrap_header_score">{props.selectedRandomQuery.score} баллов</span>
             </div>
         <div className="quizWrapBox">
-                { props.selectedRandomQuery.questionImage != null &&
+            {props.selectedRandomQuery.questionImage != null && props.selectedRandomQuery.questionImage.length > 0 && 
                     <img src={props.selectedRandomQuery.questionImage} alt="image" className="quizWrapBoxLefImage"/>}
             <div className="quizWrapBoxRight">
                 <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
                 <div className="quizWrap_question">{props.selectedRandomQuery.question}</div>
                 <Form className="quizWrap_answers">
                     {props.selectedRandomQuery.options.map((item, id) =>{
-                        
+                        const imgExist = item.img != null && item.img.length > 0;
                         return (
-                            <Form.Group className="mb-3">
-                            <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : "label_question"}
-                                        defaultValue={item}        
+                            <div className="quizQuestionItem">
+                            {imgExist &&
+                            <Image className="quizQuestionItemImage" src={item.img} 
+                            onClick={() =>{
+                                if (!answerWasShown){
+                                    const isCorrect = props.selectedRandomQuery.answers.has(id);
+                                    setState(true, id, isCorrect);
+                                    setNextButtonEnable(true);
+                                }
+                            }}/>}
+                            <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : ("label_question" + (imgExist ? "" : "_no_img"))} 
+                                        defaultValue={item.name}        
                                         onClick={() =>{
                                             if (!answerWasShown){
                                                 const isCorrect = props.selectedRandomQuery.answers.has(id);
-                                                setState(id, isCorrect);
+                                                setState(imgExist, id, isCorrect);
                                                 setNextButtonEnable(true);
                                             }
                                         }}
                             ></Form.Control>
-                            </Form.Group>
+                            </div>
                         )
                     })}
                 </Form>
