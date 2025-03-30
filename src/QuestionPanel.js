@@ -110,7 +110,8 @@ function QuestionPanel(props) {
             <div className="quizWrapBoxRight">
                 <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
                 <div className="quizWrap_question">{props.selectedRandomQuery.question}</div>
-                <Form className="quizWrap_answers">
+                <div className="quizWrap_answers_parent">
+                <div className="quizWrap_answers" >
                     {props.selectedRandomQuery.options.map((item, id) =>{
                         const imgExist = item.img != null && item.img.length > 0;
                         return (
@@ -158,7 +159,8 @@ function QuestionPanel(props) {
                             </div>
                         )
                     })}
-                </Form>
+                </div>
+                </div>
             </div>
         </div>
         <div className="quizAnsButtons">
