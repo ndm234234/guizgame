@@ -1,9 +1,10 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
+
 import QuizTable from './QuizTable.js'
 
 import {isEqual} from './tools.js'
@@ -18,6 +19,14 @@ function QuestionPanel(props) {
     const [answers, setAnswers] = useState(new Set())
     const [ignoreAnswer, setIgnoreAnswer] = useState(false)
     const [answerWasShown, setAnswerWasShown] = useState(false)
+
+    const [isFullScreen, setIsFullScreen] = useState(new Map());
+
+    const toggleFullScreen = (key) => {
+        var map = new Map(isFullScreen); 
+        map.set(key, !isFullScreen.get(key));
+        setIsFullScreen(map);
+    };
 
     useEffect(() => {
         setLabelStates(new Map());
@@ -106,15 +115,36 @@ function QuestionPanel(props) {
                         const imgExist = item.img != null && item.img.length > 0;
                         return (
                             <div className="quizQuestionItem">
+                            {isFullScreen.get(item.img) && (
+                                <div className="fullScreenImage"
+                                    onClick={() => {
+                                        toggleFullScreen(item.img);
+                                    }}
+                                    >
+                                    <img
+                                        src={item.img}
+                                        alt={item.img}
+                                        style={{
+                                            maxWidth: "90vw",
+                                            maxHeight: "90vh",
+                                            objectFit: "cover",
+                                        }}
+                                    />
+                                </div>
+                            )}
                             {imgExist &&
                             <Image className="quizQuestionItemImage" src={item.img} 
-                            onClick={() =>{
-                                if (!answerWasShown){
-                                    const isCorrect = props.selectedRandomQuery.answers.has(id);
-                                    setState(true, id, isCorrect);
-                                    setNextButtonEnable(true);
+                            onClick={(e) => {
+                                toggleFullScreen(item.img);
+                                /*
+                                if (!document.fullscreenElement) {
+                                    e.currentTarget.requestFullscreen();
                                 }
-                            }}/>}
+                                else {
+                                    document.exitFullscreen();
+                                }*/
+                            }}
+                            />}
                             <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : ("label_question" + (imgExist ? "" : "_no_img"))} 
                                         defaultValue={item.name}        
                                         onClick={() =>{

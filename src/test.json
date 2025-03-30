@@ -27,7 +27,14 @@
       ]
     },
     {
+      "answers": [
+        0,
+        2,
+        3
+      ],
+      "category": "Тестовые вопросы",
       "question": "Тестовый вопрос номер 1?",
+      "score": 50,
       "options": [
         {
           "name": "Правильный 1"
@@ -59,14 +66,7 @@
         {
           "name": "10"
         }
-      ],
-      "answers": [
-        0,
-        2,
-        3
-      ],
-      "score": 50,
-      "category": "Тестовые вопросы"
+      ]
     },
     {
       "answers": [
@@ -271,19 +271,12 @@
       ]
     },
     {
-      "answers": [
-        4
-      ],
-      "category": "Флаги и Гербы",
-      "info": "Правильный ответ - Д.",
-      "info_img": "",
       "question": "Герб Москвы",
       "questionImage": "https://s14.stc.all.kpcdn.net/russia/wp-content/uploads/2021/05/goldkolzo-goroda-s-uglichem.png",
-      "score": 50,
       "options": [
         {
           "name": "А",
-          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Coat_of_arms_of_Vladimiri_Oblast.svg/90px-Coat_of_arms_of_Vladimiri_Oblast.svg.png"
+          "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Coat_of_arms_of_Vladimiri_Oblast.svg/1200px-Coat_of_arms_of_Vladimiri_Oblast.svg.png"
         },
         {
           "name": "Б",
@@ -301,7 +294,14 @@
           "name": "Д",
           "img": "https://upload.wikimedia.org/wikipedia/commons/1/17/Coat_of_arms_of_Moscow.svg"
         }
-      ]
+      ],
+      "answers": [
+        4
+      ],
+      "score": 50,
+      "category": "Флаги и Гербы",
+      "info": "Правильный ответ - Д.",
+      "info_img": ""
     }
   ]
 }
