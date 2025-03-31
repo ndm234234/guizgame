@@ -33,6 +33,13 @@ const CenterPanel = forwardRef((props, ref)  => {
             setShowQuestion(false);
             setShowAnswer(false);
             setShowGameResult(true);
+        },
+        forceShowAnswer() {
+            modalRef.current.forceShowAnswers();
+        }, 
+        forceNext() {
+            setShowAnswer(false);
+            modalRef.current.forceNext();
         }
     }));
 
@@ -40,6 +47,7 @@ const CenterPanel = forwardRef((props, ref)  => {
         props.selectQuestion(cat, score);
         setShowQuestion(true);
         setShowQuizTable(false);
+        props.onSelectQuestion(true);
     }
 
     function showAnswers() {
@@ -57,6 +65,7 @@ const CenterPanel = forwardRef((props, ref)  => {
         } else {
             setShowQuizTable(true);
         }
+        props.onSelectQuestion(false);
     }
 
     if (!props.visible) {
@@ -65,19 +74,23 @@ const CenterPanel = forwardRef((props, ref)  => {
     else 
     return (
         <>
-        <QuizTable ref={modalRef} 
+        <QuizTable 
                    visible={showQuizTable} 
                    quiz={props.quiz} 
                    queries={props.queries}
                    selectQuestion={selectQuestion}>
         </QuizTable>
-        <QuestionPanel visible={showQuestion} 
-                       selectedRandomQuery={props.selectedRandomQuery}
-                       questionNumber={props.questionNumber}
-                       totalQuestions={props.totalQuestions}
-                       showAnswers={showAnswers}
-                       onQuestionResult={onQuestionResult} />
-        {showAnswer && <AnswerPanel 
+        <QuestionPanel 
+                    ref={modalRef}
+                    visible={showQuestion} 
+                    selectedRandomQuery={props.selectedRandomQuery}
+                    questionNumber={props.questionNumber}
+                    totalQuestions={props.totalQuestions}
+                    showAnswers={showAnswers}
+                    onQuestionResult={onQuestionResult} 
+                    showNextButton={props.showNextButton}
+                    />
+         {showAnswer && <AnswerPanel 
                      query={props.selectedRandomQuery} 
                      onClose={() => {
                           setShowAnswer(false);

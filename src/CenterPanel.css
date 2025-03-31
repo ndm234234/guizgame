@@ -3,7 +3,7 @@
   margin: 10px;
   align-content: space-around;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   scrollbar-color: darkcyan #4c93ba;
   scrollbar-width: auto;
   scroll-snap-align: center;

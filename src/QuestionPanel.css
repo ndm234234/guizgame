@@ -40,6 +40,9 @@
   flex-direction: column;
   overflow: auto;
   margin-bottom: 10px;
+
+  scrollbar-color: darkcyan #4c93ba;
+  scrollbar-width: auto;
 }
 
 .quizWrap_answers {
@@ -54,7 +57,7 @@
     scrollbar-width: auto;
     scroll-snap-align: center;
     overflow-x: auto;
-    height: 390px;
+    height: 400px;
    /* justify-content: center;*/
 }
 
@@ -83,18 +86,6 @@
 .label_question.wrong {
   background: #ffe8e8;
   border: 1px solid #c78181;
-}
-
-.quizAnsButtons {
-  border-top: 1px solid #ccc;
-  padding: 10px 10px 0px 10px;
-  display: flex;
-  grid-gap: 10px;
-  flex: 1;
-  align-items: flex-end;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  flex-direction: row;
 }
 
 .quizWrapBox {

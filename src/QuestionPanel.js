@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState, useImperativeHandle, forwardRef, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 
 import Button from 'react-bootstrap/Button';
@@ -11,11 +11,8 @@ import {isEqual} from './tools.js'
 
 import './QuestionPanel.css';
 
-
-function QuestionPanel(props) {
+const QuestionPanel = forwardRef((props, ref)  =>  {
     const [labelStates, setLabelStates] = useState(new Map())
-    const [showAnswerButtonEnable, setShowAnswerButtonEnable] = useState(true)
-    const [nextButtonEnable, setNextButtonEnable] = useState(false)
     const [answers, setAnswers] = useState(new Set())
     const [ignoreAnswer, setIgnoreAnswer] = useState(false)
     const [answerWasShown, setAnswerWasShown] = useState(false)
@@ -28,11 +25,19 @@ function QuestionPanel(props) {
         setIsFullScreen(map);
     };
 
+    useImperativeHandle(ref, () => ({
+        forceShowAnswers() {
+            showAnswers();
+        },
+        forceNext() {
+            onQuestionResult();
+        }
+    }));
+
     useEffect(() => {
         setLabelStates(new Map());
         setAnswers(new Set());
         setIgnoreAnswer(false);
-        setNextButtonEnable(false);
         setAnswerWasShown(false);
       }, [props.selectedRandomQuery]);
     
@@ -68,12 +73,9 @@ function QuestionPanel(props) {
             }
         });
         setLabelStates(newMap);
-        setNextButtonEnable(false);
-        setShowAnswerButtonEnable(false);
+        props.showNextButton(true);
 
         function show() {
-            setShowAnswerButtonEnable(true);
-            setNextButtonEnable(true);
             props.showAnswers();
         }
 
@@ -152,7 +154,7 @@ function QuestionPanel(props) {
                                             if (!answerWasShown){
                                                 const isCorrect = props.selectedRandomQuery.answers.has(id);
                                                 setState(imgExist, id, isCorrect);
-                                                setNextButtonEnable(true);
+                                                props.showNextButton(true);
                                             }
                                         }}
                             ></Form.Control>
@@ -163,12 +165,8 @@ function QuestionPanel(props) {
                 </div>
             </div>
         </div>
-        <div className="quizAnsButtons">
-            <Button variant="outline-light" disabled ={!showAnswerButtonEnable} onClick={showAnswers}>Показать ответ</Button>
-            <Button variant="outline-light" disabled ={!nextButtonEnable} onClick={onQuestionResult}>Далее</Button>
-        </div>
         </div>
     );
-}
+});
 
 export default QuestionPanel;

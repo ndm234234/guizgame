@@ -25,6 +25,12 @@ function BottomPanel(props) {
 
     return (
         <>
+        {props.showQuestion &&
+          <div className="navigate_panel">
+              <Button variant="outline-light" onClick={props.onShowAnswer}>Показать ответ</Button>
+              <Button variant="outline-light" disabled={!props.nextButtonEnabled} onClick={props.onNext}>Далее</Button>
+          </div>
+        }
         <div className="bottom_panel">
         {props.visible && <div className="game_menu_group1">
             <input type="file" id="load_file"  accept=".txt,.json" style={{ display: 'none' }} onChange={onLoad}/>

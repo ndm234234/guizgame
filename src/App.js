@@ -26,6 +26,8 @@ function App() {
   const [selectedRandomQuery, setSelectedRandomQuery] = useState(null)
   const [questionNumber, setQuestionNumber] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [showQuestion, setShowQuestion] = useState(false)
+  const [nextButtonEnabled, setNextButtonEnabled] = useState(false)
 
   const modalRef = useRef();
 
@@ -83,6 +85,7 @@ function App() {
     }
     setQueries(copyQueries);
     setQuestionNumber(questionNumber + 1);
+    setNextButtonEnabled(false);
   }
 
   function tryAgain() {
@@ -159,10 +162,27 @@ function App() {
                    questionNumber={questionNumber}
                    totalQuestions={quiz != null ? quiz.items.length : 0}
                    onQuestionResult={onQuestionResult}
+                   showNextButton = {() => {
+                    setNextButtonEnabled(true)
+                   }}
                    tryAgain={tryAgain}
+                   onSelectQuestion = {(value) => {
+                      setShowQuestion(value);
+                   }}
                    />
       </div>             
-      <BottomPanel visible={!commandsSplashVisible} onLoad={onLoad}
+      <BottomPanel visible={!commandsSplashVisible} 
+                   showQuestion={showQuestion}
+                   nextButtonEnabled={nextButtonEnabled}
+                   onLoad={onLoad}
+                   onShowAnswer={ () => {
+                      modalRef.current.forceShowAnswer()
+                    }
+                  }
+                   onNext={ () => {
+                      modalRef.current.forceNext()
+                    }
+                  }
                    OnForceFinish={() => {
                      setCurrentCommand(-1)
                      modalRef.current.forceFinish()
