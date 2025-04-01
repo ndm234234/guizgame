@@ -3,7 +3,7 @@
   margin: 10px;
   align-content: space-around;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   scrollbar-color: darkcyan #4c93ba;
   scrollbar-width: auto;
   scroll-snap-align: center;
@@ -13,3 +13,10 @@
 .center_panel.padded {
   padding-right: 10px; /* Отступ, когда скроллбар отображается */
 }
+
+@media (max-width: 768px) {
+  .center_panel {
+      overflow: auto;
+  }
+}
+  

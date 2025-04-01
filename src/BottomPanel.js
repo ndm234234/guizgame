@@ -27,8 +27,13 @@ function BottomPanel(props) {
         <>
         {props.showQuestion &&
           <div className="navigate_panel">
-              <Button variant="outline-light" onClick={props.onShowAnswer}>Показать ответ</Button>
+            { props.visible && props.isAnswerShown && props.isAnswerAllowClose &&
+              <Button variant="outline-light" onClick={() => { props.onShowAnswer(false)}}>Закрыть</Button> }
+            { props.visible && !props.isAnswerShown && 
+            <div className="navigate_panel">
+              <Button variant="outline-light" onClick={() => { props.onShowAnswer(true)}}>Показать ответ</Button>
               <Button variant="outline-light" disabled={!props.nextButtonEnabled} onClick={props.onNext}>Далее</Button>
+            </div>}
           </div>
         }
         <div className="bottom_panel">

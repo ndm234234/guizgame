@@ -42,10 +42,8 @@
   
 .navigate_panel {
   padding: 10px 10px 0px 10px;
-  display: flex
-;
+  display: flex;
   grid-gap: 10px;
-  /* flex: 1 1; */
   align-items: flex-end;
   justify-content: center;
   flex-wrap: nowrap;

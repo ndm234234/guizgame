@@ -26,7 +26,7 @@
   
 .answer_panel_data_image {
   object-fit: contain;
-  width:35%;
+  /*width:35%;*/
   height:auto;
   margin: 10px;
 }
@@ -81,9 +81,3 @@
   }
 }
   
-.answer_panel_data_info_bottom_panel {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
-}

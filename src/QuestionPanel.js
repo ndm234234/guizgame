@@ -26,8 +26,13 @@ const QuestionPanel = forwardRef((props, ref)  =>  {
     };
 
     useImperativeHandle(ref, () => ({
-        forceShowAnswers() {
-            showAnswers();
+        forceShowAnswers(value) {
+            if (value) {
+                showAnswers();
+            }
+            else {
+                props.onCloseAnswerPanel();
+            }
         },
         forceNext() {
             onQuestionResult();
@@ -73,7 +78,7 @@ const QuestionPanel = forwardRef((props, ref)  =>  {
             }
         });
         setLabelStates(newMap);
-        props.showNextButton(true);
+        props.showNextButton(false);
 
         function show() {
             props.showAnswers();
@@ -108,7 +113,7 @@ const QuestionPanel = forwardRef((props, ref)  =>  {
             </div>
         <div className="quizWrapBox">
             {props.selectedRandomQuery.questionImage != null && props.selectedRandomQuery.questionImage.length > 0 && 
-                    <img src={props.selectedRandomQuery.questionImage} alt="image" className="quizWrapBoxLefImage"/>}
+                    <Image src={props.selectedRandomQuery.questionImage} alt="image" rounded className="quizWrapBoxLefImage"/>}
             <div className="quizWrapBoxRight">
                 <div className="quizWrap_category">{props.selectedRandomQuery.category}</div>
                 <div className="quizWrap_question">{props.selectedRandomQuery.question}</div>

@@ -28,11 +28,13 @@ function App() {
   const [progress, setProgress] = useState(0)
   const [showQuestion, setShowQuestion] = useState(false)
   const [nextButtonEnabled, setNextButtonEnabled] = useState(false)
-
+  const [isAnswerShown, setIsAnswerShown] = useState(false)
+  const [isAnswerAllowClose, setIsAnswerAllowClose] = useState(false)
+    
   const modalRef = useRef();
 
   function onStart(names) {
-    setCommandsSplashVisible(false)
+    setCommandsSplashVisible(false);
     const newCommands = shuffleArray(names).map((item) => { return { name : item, questions : 0, score : 0, correctAnswers : 0}});
     setCommands(newCommands)
     onLoad(quiz)
@@ -44,6 +46,9 @@ function App() {
     setQueries(toQueries(data))
     setQuestionNumber(0);
     setProgress(0);
+
+    resetBottomNavigate();
+    
     document.title = "Викторина (" + data.title + ")";
     modalRef.current.reload();
   }
@@ -88,7 +93,14 @@ function App() {
     setNextButtonEnabled(false);
   }
 
+  function resetBottomNavigate() {
+    setShowQuestion(false);
+    setIsAnswerShown(false);
+    setIsAnswerAllowClose(false);
+  }
+
   function tryAgain() {
+    resetBottomNavigate();
     setCommandsSplashVisible(true);
   }
 
@@ -162,21 +174,30 @@ function App() {
                    questionNumber={questionNumber}
                    totalQuestions={quiz != null ? quiz.items.length : 0}
                    onQuestionResult={onQuestionResult}
-                   showNextButton = {() => {
-                    setNextButtonEnabled(true)
+                   showNextButton = {(value) => {
+                    setNextButtonEnabled(value)
                    }}
                    tryAgain={tryAgain}
                    onSelectQuestion = {(value) => {
                       setShowQuestion(value);
                    }}
+                   onShowAnswers = { ()  => {
+                      setIsAnswerAllowClose(true);
+                   }}
                    />
       </div>             
       <BottomPanel visible={!commandsSplashVisible} 
                    showQuestion={showQuestion}
+                   isAnswerShown={isAnswerShown}
+                   isAnswerAllowClose={isAnswerAllowClose}
                    nextButtonEnabled={nextButtonEnabled}
                    onLoad={onLoad}
-                   onShowAnswer={ () => {
-                      modalRef.current.forceShowAnswer()
+                   onShowAnswer={ (value) => {
+                      setIsAnswerShown(value);
+                      modalRef.current.forceShowAnswer(value)
+                      if (!value) {
+                        setIsAnswerAllowClose(false)
+                      }
                     }
                   }
                    onNext={ () => {
