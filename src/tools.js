@@ -3,37 +3,35 @@ export function getRandomItem(set) {
     return items[Math.floor(Math.random() * items.length)];
   }
 
-export function toQueries(quiz) {
+export function toQueries(quizJson) {
+
     const queries = new Map();
-    for (let i = 0; i < quiz.items.length; i++) {
-        let query = { question : quiz.items[i].question, 
-                      questionImage : quiz.items[i].questionImage, 
-                      options : quiz.items[i].options,
-                      answers : new Set(quiz.items[i].answers),
-                      score : quiz.items[i].score,
-                      info : quiz.items[i].info,
-                      info_img : quiz.items[i].info_img,
-                      category : quiz.items[i].category
-                };
+    const sortedItems = [...quizJson.items].sort((a, b) => a.category.localeCompare(b.category));
+
+    for (const item of sortedItems) {
         
-        if (queries.has(quiz.items[i].category)) {
-            if (queries.get(quiz.items[i].category).has(quiz.items[i].score)) {
-                queries.get(quiz.items[i].category).get(quiz.items[i].score).add(query );
-            }
-            else
-            {
-                queries.get(quiz.items[i].category).set(quiz.items[i].score, new Set());
-                queries.get(quiz.items[i].category).get(quiz.items[i].score).add(query);
-            }
+        const query = Object.freeze({
+            ...item,
+            answers: new Set(item.answers)
+        });
+
+        const { category, score } = query;
+ 
+        if (!queries.has(category)) {
+            queries.set(category, new Map());
         }
-        else {
-            const mapItems = new Map();
-            mapItems.set(quiz.items[i].score, new Set());
-            mapItems.get(quiz.items[i].score).add(query);
-            queries.set(quiz.items[i].category, mapItems);
+
+        const categoryMap = queries.get(category);
+
+        if (!categoryMap.has(score)) {
+            categoryMap.set(score, new Set());
         }
+        const scoreSet = categoryMap.get(score);
+
+        scoreSet.add(query);
     }
-    return queries; 
+
+    return queries;
 }
 
 export  function toTableColumns(queries) {

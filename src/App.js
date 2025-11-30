@@ -12,7 +12,7 @@ import BottomPanel from './BottomPanel.js'
 
 import {toQueries, getRandomItem, shuffleArray, deepCopyArray} from './tools.js'
 
-import testData from './test.json';
+import testData from './start.json';
 
 let initArray = [ {name : "Команда 1", questions : 0, score : 0, correctAnswers : 0 }, 
                   {name : "Команда 2", questions : 0, score : 0, correctAnswers : 0 }];
