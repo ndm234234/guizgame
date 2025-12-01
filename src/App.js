@@ -158,7 +158,7 @@ function App() {
       <CommandsSplash visible={commandsSplashVisible} 
                       commands={commandNames} 
                       onStart={onStart}/>
-      <TopPanel visible={!commandsSplashVisible} title={quiz != null ? quiz.title : ""} 
+      <TopPanel visible={!commandsSplashVisible} title={quiz != null ? quiz.title + ". Всего вопроcов:" + quiz.items.length : ""} 
                 progress={progress}
                 commands={commands} 
                 currentCommand={currentCommand} 
