@@ -1,8 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from "react";
-import { flushSync } from 'react-dom';
-
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
@@ -16,7 +12,7 @@ function BottomPanel(props) {
         var r = new FileReader();
         r.onload = function(item) { 
             const data = JSON.parse(item.target.result);
-            item.target.value = null;
+            e.target.value = '';
             props.onLoad(data);
           };
         r.readAsText(file);

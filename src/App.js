@@ -12,7 +12,7 @@ import BottomPanel from './BottomPanel.js'
 
 import {toQueries, getRandomItem, shuffleArray, deepCopyArray} from './tools.js'
 
-import testData from './start.json';
+import testDataJson from './start.json';
 
 let initArray = [ {name : "Команда 1", questions : 0, score : 0, correctAnswers : 0 }, 
                   {name : "Команда 2", questions : 0, score : 0, correctAnswers : 0 }];
@@ -21,7 +21,7 @@ function App() {
   const [commands, setCommands] = useState(initArray)
   const [currentCommand, setCurrentCommand] = useState(0)
   const [commandsSplashVisible, setCommandsSplashVisible] = useState(true)
-  const [quiz, setQuiz] = useState(testData)
+  const [quizJson, setQuizJson] = useState(testDataJson)
   const [queries, setQueries] = useState(new Map())
   const [selectedRandomQuery, setSelectedRandomQuery] = useState(null)
   const [questionNumber, setQuestionNumber] = useState(0)
@@ -33,23 +33,26 @@ function App() {
     
   const modalRef = useRef();
 
+  const title = () => quizJson != null ? quizJson.title : '';
+  const totalQuestions = () => quizJson != null ? quizJson.items.length : 0;
+
   function onStart(names) {
     setCommandsSplashVisible(false);
     const newCommands = shuffleArray(names).map((item) => { return { name : item, questions : 0, score : 0, correctAnswers : 0}});
     setCommands(newCommands)
-    onLoad(quiz)
+    onLoad(quizJson)
   }
 
-  function onLoad(data) {
+  function onLoad(dataJson) {
     setCurrentCommand(0);
-    setQuiz(data);
-    setQueries(toQueries(data))
+    setQuizJson(dataJson);
+    setQueries(toQueries(dataJson))
     setQuestionNumber(0);
     setProgress(0);
 
     resetBottomNavigate();
     
-    document.title = "Викторина (" + data.title + ")";
+    document.title = "Викторина (" + title() + ")";
     modalRef.current.reload();
   }
 
@@ -114,7 +117,7 @@ function App() {
     }
     setCommands(copyCommands)
 
-    const total = quiz != null ? quiz.items.length : 0;
+    const total = totalQuestions();
     setProgress(total > 0 ? questionNumber * 100 / total : 0)
 
     if (queries.size == 0) {
@@ -158,33 +161,33 @@ function App() {
       <CommandsSplash visible={commandsSplashVisible} 
                       commands={commandNames} 
                       onStart={onStart}/>
-      <TopPanel visible={!commandsSplashVisible} title={quiz != null ? quiz.title + ". Всего вопроcов:" + quiz.items.length : ""} 
+      <TopPanel visible={!commandsSplashVisible}
+                title={title() + ". Всего вопроcов: " + totalQuestions()} 
                 progress={progress}
                 commands={commands} 
                 currentCommand={currentCommand} 
                 onStart={onStart}/>
       <div className="center_panel" id = "center_panel-div">
-      <CenterPanel ref={modalRef} 
-                   visible={!commandsSplashVisible} 
-                   commands={commands}
-                   quiz={quiz} 
-                   queries={queries} 
-                   selectQuestion={selectQuestion}
-                   selectedRandomQuery={selectedRandomQuery}
-                   questionNumber={questionNumber}
-                   totalQuestions={quiz != null ? quiz.items.length : 0}
-                   onQuestionResult={onQuestionResult}
-                   showNextButton = {(value) => {
-                    setNextButtonEnabled(value)
-                   }}
-                   tryAgain={tryAgain}
-                   onSelectQuestion = {(value) => {
-                      setShowQuestion(value);
-                   }}
-                   onShowAnswers = { ()  => {
-                      setIsAnswerAllowClose(true);
-                   }}
-                   />
+        <CenterPanel ref={modalRef} 
+                    visible={!commandsSplashVisible} 
+                    commands={commands}
+                    queries={queries} 
+                    selectQuestion={selectQuestion}
+                    selectedRandomQuery={selectedRandomQuery}
+                    questionNumber={questionNumber}
+                    totalQuestions={totalQuestions()}
+                    onQuestionResult={onQuestionResult}
+                    showNextButton = {(value) => {
+                      setNextButtonEnabled(value)
+                    }}
+                    tryAgain={tryAgain}
+                    onSelectQuestion = {(value) => {
+                        setShowQuestion(value);
+                    }}
+                    onShowAnswers = { ()  => {
+                        setIsAnswerAllowClose(true);
+                    }}
+                    />
       </div>             
       <BottomPanel visible={!commandsSplashVisible} 
                    showQuestion={showQuestion}

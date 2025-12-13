@@ -34,24 +34,6 @@ export function toQueries(quizJson) {
     return queries;
 }
 
-export  function toTableColumns(queries) {
-    var mapColumns = new Set();
-    for (let entry of queries) {
-        for (let columns of entry[1]) {
-            mapColumns.add(columns[0]);
-        }
-    }
-
-    var sortedColumns = [];
-    for (let mapColumn of mapColumns) {
-      sortedColumns.push(mapColumn);
-    }
-    sortedColumns.sort(function(a,b){
-      return a - b;
-    });
-    return sortedColumns;
-}
-
 export function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) { 
         // Generate random number 

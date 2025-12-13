@@ -75,12 +75,9 @@ const CenterPanel = forwardRef((props, ref)  => {
     else 
     return (
         <>
-        <QuizTable 
-                   visible={showQuizTable} 
-                   quiz={props.quiz} 
+        <QuizTable visible={showQuizTable} 
                    queries={props.queries}
-                   selectQuestion={selectQuestion}>
-        </QuizTable>
+                   selectQuestion={selectQuestion}/>
         <QuestionPanel 
                     ref={modalRef}
                     visible={showQuestion} 
@@ -94,12 +91,8 @@ const CenterPanel = forwardRef((props, ref)  => {
                         setShowAnswer(false);
                         setShowQuestion(true);
                         props.showNextButton(true);
-                    }} 
-                  />
-         {showAnswer && <AnswerPanel 
-                     query={props.selectedRandomQuery} 
-                     />
-        }
+                    }}/>
+        {showAnswer && <AnswerPanel query={props.selectedRandomQuery}/>}
         <GameResultPanel visible={showGameResult}
                          commands={props.commands}
                          tryAgain={props.tryAgain} />
