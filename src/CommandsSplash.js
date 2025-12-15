@@ -6,8 +6,8 @@ import {uuid, deepCopyArray} from './tools.js'
 import Form from 'react-bootstrap/Form';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Col from 'react-bootstrap/Col';
+
+import FileLoader from './FileLoader.js'
 
 import './CommandsSplash.css';
 
@@ -16,6 +16,7 @@ function CommandsSplash(props) {
     const [commandCounter, setCommandCounter] = useState(0)
 
     const alertRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     const onCreateCommand = () => {
         flushSync(() =>{
@@ -65,7 +66,7 @@ function CommandsSplash(props) {
     else return(
     <Modal show centered className="modal-fixed_width">
         <Modal.Header className="modal-header-custom modal-content-custom">
-          <Modal.Title>Введите названия команд</Modal.Title>
+          <Modal.Title className="w-100 text-center">{props.quizTitle}<br/>Введите названия команд</Modal.Title>
         </Modal.Header>
         <Modal.Body className="modal-content-custom"> 
             <div className="fields" id="fields" ref={alertRef}>
@@ -85,6 +86,8 @@ function CommandsSplash(props) {
             </div>
         </Modal.Body>
         <Modal.Footer centered className="modal-content-custom">
+            <FileLoader ref={fileInputRef} onLoad={props.onLoad}/>
+            <Button variant="outline-light" className="me-3" onClick={() => { fileInputRef.current.click(); }}>Загрузить игру</Button>{' '}
             <Button variant="outline-light" onClick={onCreateCommand}>Добавить команду</Button>{' '}
             <Button variant="outline-light" onClick={() => {
                 const isEmpty = commands.filter((item) => item.name.length == 0).length > 0;

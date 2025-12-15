@@ -20,7 +20,7 @@ function GameResultPanel(props) {
         return (
         <Modal show centered className="modal-fixed_width" size="md">
             <Modal.Header className="modal-header-custom modal-content-custom">
-                <Modal.Title>Итоги</Modal.Title>
+                <Modal.Title className="w-100 text-center">{props.quizTitle}<br/>Итоги</Modal.Title>
             </Modal.Header>
             <Modal.Body className="modal-content-custom"> 
                 <span >{result.length > 0 ? result.map((item, index) => {

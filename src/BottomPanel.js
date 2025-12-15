@@ -1,6 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+
+// import FileLoader from './FileLoader.js'
 
 import './BottomPanel.css';
 
@@ -19,6 +22,8 @@ function BottomPanel(props) {
       }
     }
 
+    const fileInputRef = useRef(null);
+
     return (
         <>
         {props.showQuestion &&
@@ -34,17 +39,19 @@ function BottomPanel(props) {
         }
         <div className="bottom_panel">
         {props.visible && <div className="game_menu_group1">
-            <input type="file" id="load_file"  accept=".txt,.json" style={{ display: 'none' }} onChange={onLoad}/>
             <DropdownButton variant="outline-light" id="dropdown-item-button" title="Игра">
               <Dropdown.Item as="button" onClick={props.tryAgain}>Новая</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item as="button" onClick={() => { document.getElementById('load_file').click(); }}>Загрузить</Dropdown.Item>
+              {/*
+              <FileLoader ref={fileInputRef} onLoad={props.onLoad}/>
+              <Dropdown.Item as="button" onClick={() => { fileInputRef.current.click(); }}>Загрузить</Dropdown.Item>
+              */}
               <Dropdown.Item as="button" onClick={() => { props.OnForceFinish(true)}}>Завершить</Dropdown.Item>
           </DropdownButton>
         </div>
         }
         <div className="bottom_panel_info">
-              <h1>Школа 1538 Класс 4Э<br/>2025-2026г. Под руководством Давыдовой С.В.</h1>
+              <h1>Братищев А.В.<br/>Школа 1538 Класс 4Э<br/>2025-2026г. Под руководством Давыдовой С.В.</h1>
         </div>
       </div>
       </>

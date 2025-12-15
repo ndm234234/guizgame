@@ -160,7 +160,10 @@ function App() {
     <div className="App" >
       <CommandsSplash visible={commandsSplashVisible} 
                       commands={commandNames} 
-                      onStart={onStart}/>
+                      quizTitle={"Викторина: " + title()}
+                      onStart={onStart}
+                      onLoad = {setQuizJson}
+                      />
       <TopPanel visible={!commandsSplashVisible}
                 title={title() + ". Всего вопроcов: " + totalQuestions()} 
                 progress={progress}
@@ -170,6 +173,7 @@ function App() {
       <div className="center_panel" id = "center_panel-div">
         <CenterPanel ref={modalRef} 
                     visible={!commandsSplashVisible} 
+                    quizTitle={"Викторина: " + title()}
                     commands={commands}
                     queries={queries} 
                     selectQuestion={selectQuestion}
