@@ -71,7 +71,8 @@ export function sortedResult(commands) {
         yourListMaps.push( { command : cmd.name, 
                              questions : cmd.questions, 
                              correctAnswers : cmd.correctAnswers,
-                             score : cmd.score });
+                             score : cmd.score,
+                             logo: cmd.logo });
       }
     }
   

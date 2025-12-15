@@ -3,6 +3,7 @@ import { flushSync } from 'react-dom';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Fade from 'react-bootstrap/Fade';
+import Image from 'react-bootstrap/Image';
 
 import './TopPanel.css';
 
@@ -33,6 +34,7 @@ function ScoreItem(props) {
     return (
         <div key={props.index} className = {props.selected}>
             <div className="command_name_info">
+                <Image src={props.item.logo} alt="image" className="answer_panel_data_image" rounded/>
                 <span className = "span_command_name">{props.item.name}</span>
             </div>
                 <div className="command_name_info_status">

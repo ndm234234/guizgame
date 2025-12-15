@@ -14,8 +14,32 @@ import {toQueries, getRandomItem, shuffleArray, deepCopyArray} from './tools.js'
 
 import testDataJson from './start.json';
 
-let initArray = [ {name : "Команда 1", questions : 0, score : 0, correctAnswers : 0 }, 
-                  {name : "Команда 2", questions : 0, score : 0, correctAnswers : 0 }];
+const animations = Array.from({ length: 67 }, (_, i) =>
+  `avatars/animation_${String(i + 1).padStart(2, '0')}.gif`
+);
+
+function shuffle(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+let shuffledAnimations = shuffle(animations);
+let currentIndex = 0;
+
+const randomAnimation = () => {
+  if (currentIndex >= shuffledAnimations.length) {
+    shuffledAnimations = shuffle(animations);
+    currentIndex = 0;
+  }
+  return shuffledAnimations[currentIndex++];
+};
+
+let initArray = [ {name : "Команда 1", questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation() }, 
+                  {name : "Команда 2", questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation() }];
 
 function App() {
   const [commands, setCommands] = useState(initArray)
@@ -38,7 +62,7 @@ function App() {
 
   function onStart(names) {
     setCommandsSplashVisible(false);
-    const newCommands = shuffleArray(names).map((item) => { return { name : item, questions : 0, score : 0, correctAnswers : 0}});
+    const newCommands = shuffleArray(names).map((item) => { return { name : item, questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation()}});
     setCommands(newCommands)
     onLoad(quizJson)
   }
