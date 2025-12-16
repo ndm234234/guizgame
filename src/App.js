@@ -14,7 +14,7 @@ import {toQueries, getRandomItem, shuffleArray, deepCopyArray} from './tools.js'
 
 import testDataJson from './start.json';
 
-const animations = Array.from({ length: 67 }, (_, i) =>
+const animations = Array.from({ length: 64 }, (_, i) =>
   `avatars/animation_${String(i + 1).padStart(2, '0')}.gif`
 );
 
@@ -58,7 +58,7 @@ function App() {
   const modalRef = useRef();
 
   const title = () => quizJson != null ? quizJson.title : '';
-  const totalQuestions = () => quizJson != null ? quizJson.items.length : 0;
+  const totalQuestions = () => quizJson?.items?.length || 0;
 
   function onStart(names) {
     setCommandsSplashVisible(false);
