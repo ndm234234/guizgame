@@ -1,45 +1,177 @@
-.quiz_table {
-    border-collapse: collapse;
+/* Контейнер для таблицы с горизонтальным скроллом на мобильных */
+.quiz-table-container {
     width: 100%;
- /*  box-shadow: 0 0 20px rgba(0,0,0,0.1); */
-    cursor: pointer;
-    font-size: 24px;
-
-    animation: fadeIn 0.3s 1;
-    opacity: 1;
-
-    > :not(caption) > * > * {
-        color: #fff;
-    }
-
-    tr>th:first-child,tr>td:first-child {
-       /* position: sticky; */
-        left: 0;
-      }
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-th, td {
+/* Основные стили таблицы */
+.quiz-table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 500px;
+    /* Минимальная ширина для мобильных */
+    font-size: 24px;
+    animation: fadeIn 0.3s 1;
+    opacity: 1;
+    margin-bottom: 0;
+}
+
+/* Общие стили для всех ячеек */
+.quiz-table th,
+.quiz-table td {
     border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-    padding: 10px;
+    padding: 0 !important;
+    /* Убираем стандартный padding */
     text-align: center;
     vertical-align: middle;
     background: #74b6db !important;
     color: #fff !important;
+    height: 90px;
 }
-/*
-th {
-    background-color: #ddd;
-}*/
 
+/* Стили для внутреннего контента ячеек */
+.quiz-table .cell-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Первый столбец (широкий) */
+.quiz-table-first-col {
+    width: auto !important;
+    min-width: 180px;
+    max-width: none;
+}
+
+/* Текст в первом столбце - всегда виден полностью */
+.quiz-table-first-col .cell-content {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    justify-content: center;
+}
+
+/* Остальные столбцы (одинаковой ширины) */
+.quiz-table-other-col {
+    width: 120px !important;
+    /* Фиксированная одинаковая ширина */
+    min-width: 120px !important;
+    max-width: 120px !important;
+}
+
+/* Текст в остальных столбцах - обрезается с многоточием */
+.quiz-table-other-col .cell-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Стили для кликабельных ячеек */
+.quiz-table .clickable-cell {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.quiz-table .clickable-cell:hover {
+    background: #5a9ec9 !important;
+}
+
+/* Переопределение Bootstrap стилей */
+.quiz-table.table-striped-columns>tbody>tr> :nth-child(2n) {
+    background-color: #74b6db !important;
+}
+
+.quiz-table.table-striped-columns>tbody>tr> :nth-child(2n+1) {
+    background-color: #74b6db !important;
+}
+
+.quiz-table.table-hover>tbody>tr:hover>* {
+    background-color: #74b6db !important;
+}
+
+/* Hover эффект только для кликабельных ячеек */
+.quiz-table.table-hover>tbody>tr>.clickable-cell:hover {
+    background-color: #5a9ec9 !important;
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 992px) {
+    .quiz-table {
+        font-size: 18px;
+    }
+
+    .quiz-table th,
+    .quiz-table td {
+        height: 60px;
+    }
+
+    .quiz-table-first-col {
+        min-width: 150px;
+    }
+
+    .quiz-table-other-col {
+        width: 100px !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
+    }
+}
+
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    .quiz_table {
+    .quiz-table {
         font-size: 16px;
+        min-width: 400px;
     }
-/*
-    .quiz_table td {
-        display: block;
+
+    .quiz-table th,
+    .quiz-table td {
+        height: 55px;
     }
-*/
+
+    .quiz-table .cell-content {
+        padding: 6px;
+    }
+
+    .quiz-table-first-col {
+        min-width: 120px;
+    }
+
+    .quiz-table-other-col {
+        width: 90px !important;
+        min-width: 90px !important;
+        max-width: 90px !important;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .quiz-table {
+        font-size: 14px;
+        min-width: 350px;
+    }
+
+    .quiz-table th,
+    .quiz-table td {
+        height: 50px;
+    }
+
+    .quiz-table .cell-content {
+        padding: 4px;
+    }
+
+    .quiz-table-first-col {
+        min-width: 100px;
+    }
+
+    .quiz-table-other-col {
+        width: 80px !important;
+        min-width: 80px !important;
+        max-width: 80px !important;
+    }
 }

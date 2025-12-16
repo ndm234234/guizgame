@@ -1,5 +1,4 @@
 import Table from 'react-bootstrap/Table';
-
 import './QuizTable.css';
 
 function sizeStr(value) {
@@ -24,8 +23,8 @@ function toTableColumns(queries) {
 
     const sortedColumns = Array.from(mapColumns);
     sortedColumns.sort((a, b) => {
-            return a - b;
-        });
+        return a - b;
+    });
     return sortedColumns;
 }
 
@@ -37,40 +36,61 @@ function QuizTable(props) {
     }
 
     const tableColumns = toTableColumns(queries);
-    const queriesArray = [...queries]; 
+    const queriesArray = [...queries];
 
     return (
-        <Table striped="columns" bordered hover size="lg" className="quiz_table">
-            <tbody>
-                {queriesArray.map(([rowKey, rowDataMap]) => {
-                    return (
-                        <tr key={rowKey}>
-                            <td>{rowKey}</td>
-                            {tableColumns.map((column) => {
-                                const cellKey = `${rowKey}_${column}`;
+        <div className="quiz-table-container">
+            <Table striped="columns" bordered hover className="quiz-table">
+                <tbody>
+                    {queriesArray.map(([rowKey, rowDataMap]) => {
+                        return (
+                            <tr key={rowKey}>
+                                {/* Первый столбец - занимает оставшееся пространство */}
+                                <td className="quiz-table-first-col text-center">
+                                    <div className="cell-content">
+                                        {rowKey}
+                                    </div>
+                                </td>
                                 
-                                if (rowDataMap.has(column)) {
-                                    const cellData = rowDataMap.get(column);
-                                    const questionScore = sizeStr(cellData.size);
+                                {/* Остальные столбцы - одинаковой ширины */}
+                                {tableColumns.map((column) => {
+                                    const cellKey = `${rowKey}_${column}`;
                                     
-                                    return (
-                                        <td 
-                                            key={cellKey}
-                                            onClick={() => selectQuestion(rowKey, column)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            {column}{questionScore}
-                                        </td>
-                                    );
-                                } else {
-                                    return <td key={cellKey}>-</td>;
-                                }
-                            })}
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </Table>
+                                    if (rowDataMap.has(column)) {
+                                        const cellData = rowDataMap.get(column);
+                                        const questionScore = sizeStr(cellData.size);
+                                        
+                                        return (
+                                            <td 
+                                                key={cellKey}
+                                                onClick={() => selectQuestion(rowKey, column)}
+                                                className="quiz-table-other-col text-center clickable-cell"
+                                                title={`${column}${questionScore}`}
+                                            >
+                                                <div className="cell-content">
+                                                    {column}{questionScore}
+                                                </div>
+                                            </td>
+                                        );
+                                    } else {
+                                        return (
+                                            <td 
+                                                key={cellKey}
+                                                className="quiz-table-other-col text-center"
+                                            >
+                                                <div className="cell-content">
+                                                    -
+                                                </div>
+                                            </td>
+                                        );
+                                    }
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 
