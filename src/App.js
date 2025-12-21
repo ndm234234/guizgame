@@ -8,11 +8,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import CommandsSplash from './CommandsSplash.js'
 import TopPanel from './TopPanel.js'
 import CenterPanel from './CenterPanel.js'
+import LoadingScreen from './LoadingScreen.js'
 import BottomPanel from './BottomPanel.js'
 
 import { toQueries, getRandomItem, shuffleArray, deepCopyArray } from './tools.js'
 
-import testDataJson from './start.json';
+//import testDataJson from './start.json';
+const testDataJson = null;
 
 const animations = Array.from({ length: 64 }, (_, i) =>
   `avatars/animation_${String(i + 1).padStart(2, '0')}.gif`
@@ -54,7 +56,48 @@ function App() {
   const [nextButtonEnabled, setNextButtonEnabled] = useState(false)
   const [isAnswerAllowClose, setIsAnswerAllowClose] = useState(false)
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const modalRef = useRef();
+
+  useEffect(() => {
+
+    let isMounted = true;
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch('start.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const json = await response.text();
+        const jsonData = JSON.parse(json);
+        // const jsonData = await response.json();
+        if (isMounted) {
+          setQuizJson(jsonData);
+          /*
+          setTimeout(() => {
+            setQuizJson(jsonData);
+          }, 2000);
+          */
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+
+  }, []);
+
 
   const title = () => quizJson != null ? quizJson.title : '';
   const totalQuestions = () => quizJson?.items?.length || 0;
@@ -177,12 +220,19 @@ function App() {
 
   const commandNames = commands.map((item) => item.name);
 
-  return (
+  if (quizJson == null) {
+    return (
+      <div className="App" >
+        <LoadingScreen />
+      </div>
+    )
+  }
 
+  return (
     <div className="App" >
       <CommandsSplash visible={commandsSplashVisible}
         commands={commandNames}
-        quizTitle={"Викторина: " + title()}
+        quizTitle={"Викторина: " + (title().length > 0 ? title() : "загрузка ...")}
         onStart={onStart}
         onLoad={setQuizJson}
       />
