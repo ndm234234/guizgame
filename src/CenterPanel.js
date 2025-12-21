@@ -51,9 +51,9 @@ const CenterPanel = forwardRef((props, ref)  => {
     }
 
     function showAnswers() {
-        setShowQuestion(false);
         setShowAnswer(true);
-        props.onShowAnswers();
+       //setShowQuestion(false);
+       // props.onShowAnswers();
     }
 
     function onQuestionResult(result, score) {
@@ -92,7 +92,14 @@ const CenterPanel = forwardRef((props, ref)  => {
                         setShowQuestion(true);
                         props.showNextButton(true);
                     }}/>
-        {showAnswer && <AnswerPanel query={props.selectedRandomQuery}/>}
+        {showAnswer && 
+        <AnswerPanel query={props.selectedRandomQuery}
+                     onCloseAnswerPanel={() => {
+                                setShowAnswer(false);
+                                setShowQuestion(true);
+                                props.showNextButton(true);
+                    }}
+        />}
         <GameResultPanel visible={showGameResult}
                          commands={props.commands}
                          quizTitle={props.quizTitle}

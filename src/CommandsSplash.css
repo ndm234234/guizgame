@@ -4,10 +4,11 @@
 
 .modal-content-custom {
   background-color: #74b6db !important;
-/*  background-color: darkcyan;*/
+  /*  background-color: darkcyan;*/
   color: #fff;
   justify-content: center;
 }
+
 .modal-fixed_max_width {
   width: 450px;
 }
@@ -16,8 +17,8 @@
   width: 100%;
   padding-right: 20px;
 }
-  
-.fields{
+
+.fields {
   display: flex;
   flex-direction: column;
   justify-content: safe center;
@@ -28,24 +29,33 @@
   overflow-y: auto;
   z-index: 100;
   scrollbar-color: darkcyan #4c93ba;
-  scrollbar-width :auto;
+  scrollbar-width: auto;
   scroll-snap-align: center;
   padding-left: 20px;
- /* background-color: darkcyan;*/
+  /* background-color: darkcyan;*/
   border-radius: 10px;
-/*  scrollbar-gutter: stable;*/
+  /*  scrollbar-gutter: stable;*/
 }
- 
+
 .closeButton {
   height: auto !important;
   width: 30px !important;
   margin: 5px !important;
 }
 
-.input-row { 
+.input-row {
   /*background: red;*/
   padding: 10px;
   display: flex;
   width: 100%;
 }
 
+.input-row .closeButton {
+  filter: brightness(0) invert(1);
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.input-row .closeButton:hover {
+  opacity: 0.7;
+}

@@ -32,9 +32,7 @@ function BottomPanel(props) {
     <>
       {props.showQuestion &&
         <div className="navigate_panel">
-          {props.visible && props.isAnswerShown && props.isAnswerAllowClose &&
-            <Button variant="outline-light" onClick={() => { props.onShowAnswer(false) }}>Закрыть</Button>}
-          {props.visible && !props.isAnswerShown &&
+          {props.visible &&
             <div className="navigate_panel">
               <Button variant="outline-light" onClick={() => { props.onShowAnswer(true) }}>Показать ответ</Button>
               <Button variant="outline-light" disabled={!props.nextButtonEnabled} onClick={props.onNext}>Далее</Button>

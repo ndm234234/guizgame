@@ -1,4 +1,4 @@
-import  { useEffect, useLayoutEffect, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import logo from './logo.svg';
@@ -10,7 +10,7 @@ import TopPanel from './TopPanel.js'
 import CenterPanel from './CenterPanel.js'
 import BottomPanel from './BottomPanel.js'
 
-import {toQueries, getRandomItem, shuffleArray, deepCopyArray} from './tools.js'
+import { toQueries, getRandomItem, shuffleArray, deepCopyArray } from './tools.js'
 
 import testDataJson from './start.json';
 
@@ -38,8 +38,8 @@ const randomAnimation = () => {
   return shuffledAnimations[currentIndex++];
 };
 
-let initArray = [ {name : "Команда 1", questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation() }, 
-                  {name : "Команда 2", questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation() }];
+let initArray = [{ name: "Команда 1", questions: 0, score: 0, correctAnswers: 0, logo: randomAnimation() },
+{ name: "Команда 2", questions: 0, score: 0, correctAnswers: 0, logo: randomAnimation() }];
 
 function App() {
   const [commands, setCommands] = useState(initArray)
@@ -52,9 +52,8 @@ function App() {
   const [progress, setProgress] = useState(0)
   const [showQuestion, setShowQuestion] = useState(false)
   const [nextButtonEnabled, setNextButtonEnabled] = useState(false)
-  const [isAnswerShown, setIsAnswerShown] = useState(false)
   const [isAnswerAllowClose, setIsAnswerAllowClose] = useState(false)
-    
+
   const modalRef = useRef();
 
   const title = () => quizJson != null ? quizJson.title : '';
@@ -62,7 +61,7 @@ function App() {
 
   function onStart(names) {
     setCommandsSplashVisible(false);
-    const newCommands = shuffleArray(names).map((item) => { return { name : item, questions : 0, score : 0, correctAnswers : 0, logo: randomAnimation()}});
+    const newCommands = shuffleArray(names).map((item) => { return { name: item, questions: 0, score: 0, correctAnswers: 0, logo: randomAnimation() } });
     setCommands(newCommands)
     onLoad(quizJson)
   }
@@ -75,7 +74,7 @@ function App() {
     setProgress(0);
 
     resetBottomNavigate();
-    
+
     document.title = "Викторина (" + title() + ")";
     modalRef.current.reload();
   }
@@ -84,31 +83,31 @@ function App() {
     const copyQueries = new Map(queries);
     if (copyQueries.has(cat)) {
       if (copyQueries.get(cat).has(scoreValue)) {
-  
+
         const selectedRandomQueryItem = getRandomItem(copyQueries.get(cat).get(scoreValue).values());
         copyQueries.get(cat).get(scoreValue).delete(selectedRandomQueryItem);
 
         // random answers order
         const options = shuffleArray(selectedRandomQueryItem.options.map((item, index) => {
-            return { name: item, correct: selectedRandomQueryItem.answers.has(index) };
+          return { name: item, correct: selectedRandomQueryItem.answers.has(index) };
         }));
 
-        const queryItem = 
+        const queryItem =
         {
-          category : selectedRandomQueryItem.category,
-          score : selectedRandomQueryItem.score,
-          question : selectedRandomQueryItem.question,
-          questionImage : selectedRandomQueryItem.questionImage,
-          options : options.map((item) => item.name),
-          answers : new Set(options.map((item, index) => { return { item: item, index: index}}).filter((item) => item.item.correct).map((item) => item.index)),
-          info : selectedRandomQueryItem.info,
-          info_img : selectedRandomQueryItem.info_img
+          category: selectedRandomQueryItem.category,
+          score: selectedRandomQueryItem.score,
+          question: selectedRandomQueryItem.question,
+          questionImage: selectedRandomQueryItem.questionImage,
+          options: options.map((item) => item.name),
+          answers: new Set(options.map((item, index) => { return { item: item, index: index } }).filter((item) => item.item.correct).map((item) => item.index)),
+          info: selectedRandomQueryItem.info,
+          info_img: selectedRandomQueryItem.info_img
         };
 
         setSelectedRandomQuery(queryItem);
-  
+
         if (copyQueries.get(cat).get(scoreValue).size == 0) {
-            copyQueries.get(cat).delete(scoreValue);
+          copyQueries.get(cat).delete(scoreValue);
         }
         if (copyQueries.get(cat).size == 0) {
           copyQueries.delete(cat);
@@ -122,7 +121,6 @@ function App() {
 
   function resetBottomNavigate() {
     setShowQuestion(false);
-    setIsAnswerShown(false);
     setIsAnswerAllowClose(false);
   }
 
@@ -132,12 +130,12 @@ function App() {
   }
 
   function onQuestionResult(result, score) {
-    const copyCommands =  deepCopyArray(commands);
+    const copyCommands = deepCopyArray(commands);
     const command = copyCommands[currentCommand];
-    command.questions ++;
-    if (result) { 
+    command.questions++;
+    if (result) {
       command.score += score;
-      command.correctAnswers ++;
+      command.correctAnswers++;
     }
     setCommands(copyCommands)
 
@@ -159,7 +157,7 @@ function App() {
   function updateCenterPanelScrollBarState() {
     const scrollableDiv = document.getElementById('center_panel-div');
     if (scrollableDiv != null) {
-        scrollableDiv.classList.remove('padded'); // Убираем класс, если скроллбара нет
+      scrollableDiv.classList.remove('padded'); // Убираем класс, если скроллбара нет
       // Проверка, необходимо ли добавлять отступ
       if (scrollableDiv.scrollHeight > scrollableDiv.clientHeight) {
         scrollableDiv.classList.add('padded'); // Добавляем класс с паддингом
@@ -177,69 +175,67 @@ function App() {
   window.onload = updateCenterPanelScrollBarState;
   window.onresize = updateCenterPanelScrollBarState;
 
-  const commandNames = commands.map((item) =>  item.name);
+  const commandNames = commands.map((item) => item.name);
 
   return (
 
     <div className="App" >
-      <CommandsSplash visible={commandsSplashVisible} 
-                      commands={commandNames} 
-                      quizTitle={"Викторина: " + title()}
-                      onStart={onStart}
-                      onLoad = {setQuizJson}
-                      />
+      <CommandsSplash visible={commandsSplashVisible}
+        commands={commandNames}
+        quizTitle={"Викторина: " + title()}
+        onStart={onStart}
+        onLoad={setQuizJson}
+      />
       <TopPanel visible={!commandsSplashVisible}
-                title={title() + ". Всего вопроcов: " + totalQuestions()} 
-                progress={progress}
-                commands={commands} 
-                currentCommand={currentCommand} 
-                onStart={onStart}/>
-      <div className="center_panel" id = "center_panel-div">
-        <CenterPanel ref={modalRef} 
-                    visible={!commandsSplashVisible} 
-                    quizTitle={"Викторина: " + title()}
-                    commands={commands}
-                    queries={queries} 
-                    selectQuestion={selectQuestion}
-                    selectedRandomQuery={selectedRandomQuery}
-                    questionNumber={questionNumber}
-                    totalQuestions={totalQuestions()}
-                    onQuestionResult={onQuestionResult}
-                    showNextButton = {(value) => {
-                      setNextButtonEnabled(value)
-                    }}
-                    tryAgain={tryAgain}
-                    onSelectQuestion = {(value) => {
-                        setShowQuestion(value);
-                    }}
-                    onShowAnswers = { ()  => {
-                        setIsAnswerAllowClose(true);
-                    }}
-                    />
-      </div>             
-      <BottomPanel visible={!commandsSplashVisible} 
-                   showQuestion={showQuestion}
-                   isAnswerShown={isAnswerShown}
-                   isAnswerAllowClose={isAnswerAllowClose}
-                   nextButtonEnabled={nextButtonEnabled}
-                   onLoad={onLoad}
-                   onShowAnswer={ (value) => {
-                      setIsAnswerShown(value);
-                      modalRef.current.forceShowAnswer(value)
-                      if (!value) {
-                        setIsAnswerAllowClose(false)
-                      }
-                    }
-                  }
-                   onNext={ () => {
-                      modalRef.current.forceNext()
-                    }
-                  }
-                   OnForceFinish={() => {
-                     setCurrentCommand(-1)
-                     modalRef.current.forceFinish()
-                   }} 
-                   tryAgain={tryAgain}/>
+        title={title() + ". Всего вопроcов: " + totalQuestions()}
+        progress={progress}
+        commands={commands}
+        currentCommand={currentCommand}
+        onStart={onStart} />
+      <div className="center_panel" id="center_panel-div">
+        <CenterPanel ref={modalRef}
+          visible={!commandsSplashVisible}
+          quizTitle={"Викторина: " + title()}
+          commands={commands}
+          queries={queries}
+          selectQuestion={selectQuestion}
+          selectedRandomQuery={selectedRandomQuery}
+          questionNumber={questionNumber}
+          totalQuestions={totalQuestions()}
+          onQuestionResult={onQuestionResult}
+          showNextButton={(value) => {
+            setNextButtonEnabled(value)
+          }}
+          tryAgain={tryAgain}
+          onSelectQuestion={(value) => {
+            setShowQuestion(value);
+          }}
+          onShowAnswers={() => {
+            setIsAnswerAllowClose(true);
+          }}
+        />
+      </div>
+      <BottomPanel visible={!commandsSplashVisible}
+        showQuestion={showQuestion}
+        isAnswerAllowClose={isAnswerAllowClose}
+        nextButtonEnabled={nextButtonEnabled}
+        onLoad={onLoad}
+        onShowAnswer={(value) => {
+          modalRef.current.forceShowAnswer(value)
+          if (!value) {
+            setIsAnswerAllowClose(false)
+          }
+        }
+        }
+        onNext={() => {
+          modalRef.current.forceNext()
+        }
+        }
+        OnForceFinish={() => {
+          setCurrentCommand(-1)
+          modalRef.current.forceFinish()
+        }}
+        tryAgain={tryAgain} />
     </div>
   );
 }
