@@ -15,7 +15,7 @@ const LoadingScreen = () => {
           variant="primary"
           style={{ width: '4rem', height: '4rem' }}
         />
-        <h4 className="mt-3">Загрузка приложения...</h4>
+        <h4 className="mt-3">Загрузка приложения ...</h4>
       </div>
     </div>
   );
