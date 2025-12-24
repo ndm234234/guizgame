@@ -9,7 +9,6 @@ import Image from 'react-bootstrap/Image';
 import './AnswerPanel.css';
 
 function AnswerPanel(props) {
-  const [show, setShow] = useState(true);
 
   const imgUrl = props.query.info_img != null && props.query.info_img.length > 0
     ? props.query.info_img
@@ -19,9 +18,10 @@ function AnswerPanel(props) {
     <Modal
       show={true}
       fullscreen={true}
+      animation={false}
       onHide={props.onCloseAnswerPanel}
       className="answer_panel_data"
-      backdrop="static"
+      backdrop={false}
       keyboard={true}
     >
       <Modal.Header closeButton className="border-bottom">

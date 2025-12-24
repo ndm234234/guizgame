@@ -65,18 +65,27 @@ const QuestionPanel = forwardRef((props, ref) => {
         if (!IsCorrectAnswers()) {
             setIgnoreAnswer(true);
         }
-        const newMap = new Map();
-        props.selectedRandomQuery.options.map((item, id) => {
-            const imgExist = item.img != null && item.img.length > 0;
-            const isCorrect = props.selectedRandomQuery.answers.has(id);
-            if (imgExist) {
-                newMap.set(id, isCorrect ? "label_question correct" : "label_question wrong");
-            }
-            else {
-                newMap.set(id, isCorrect ? "label_question_no_img correct" : "label_question_no_img wrong");
-            }
+
+        props.selectedRandomQuery.options.map((item, index) => {
+
+            setTimeout(() => {
+                setLabelStates(prevMap => {
+                    const nextMap = new Map(prevMap);
+
+                    const hasImg = item.img != null && item.img.length > 0;
+                    const isCorrect = props.selectedRandomQuery.answers.has(index);
+
+                    const className = hasImg
+                        ? (isCorrect ? 'label_question correct' : 'label_question wrong')
+                        : (isCorrect ? 'label_question_no_img correct' : 'label_question_no_img wrong');
+
+                    nextMap.set(index, className);
+                    return nextMap;
+                });
+            },
+            50 * (index + 1));
         });
-        setLabelStates(newMap);
+
         props.showNextButton(false);
 
         function show() {
@@ -86,7 +95,10 @@ const QuestionPanel = forwardRef((props, ref) => {
         if (IsCorrectAnswers() || answerWasShown || answers.size == props.selectedRandomQuery.options.length) {
             show();
         } else {
-            setTimeout(() => { show(); }, 2000);
+            setTimeout(() => {
+                show();
+            },
+            200 * (props.selectedRandomQuery.options.length + 1));
         }
 
         setAnswerWasShown(true);
@@ -128,13 +140,14 @@ const QuestionPanel = forwardRef((props, ref) => {
                                                         toggleFullScreen(item.img);
                                                     }}
                                                 >
-                                                    <img
+                                                    <Image
                                                         src={item.img}
                                                         alt={item.img}
                                                         style={{
-                                                            maxWidth: "90vw",
-                                                            maxHeight: "90vh",
-                                                            objectFit: "cover",
+                                                            width: '80vw',
+                                                            height: '80vh',
+                                                            objectFit: 'contain',
+                                                            display: 'block'
                                                         }}
                                                     />
                                                 </div>
@@ -152,7 +165,8 @@ const QuestionPanel = forwardRef((props, ref) => {
                                                         }*/
                                                     }}
                                                 />}
-                                            <Form.Control readOnly id={id} type="text" className={labelStates.has(id) ? labelStates.get(id) : ("label_question" + (imgExist ? "" : "_no_img"))}
+                                            <Form.Control readOnly id={id} type="text"
+                                                className={labelStates.has(id) ? labelStates.get(id) : ("label_question" + (imgExist ? "" : "_no_img"))}
                                                 defaultValue={item.name}
                                                 onClick={() => {
                                                     if (!answerWasShown) {

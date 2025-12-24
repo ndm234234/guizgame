@@ -10,6 +10,7 @@ import TopPanel from './TopPanel.js'
 import CenterPanel from './CenterPanel.js'
 import LoadingScreen from './LoadingScreen.js'
 import BottomPanel from './BottomPanel.js'
+import Toast from 'react-bootstrap/Toast';
 
 import { toQueries, getRandomItem, shuffleArray, deepCopyArray } from './tools.js'
 
@@ -55,6 +56,10 @@ function App() {
   const [showQuestion, setShowQuestion] = useState(false)
   const [nextButtonEnabled, setNextButtonEnabled] = useState(false)
   const [isAnswerAllowClose, setIsAnswerAllowClose] = useState(false)
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastTitle, setToastTitle] = useState('');
+  const [toastHeader, setToastHeader] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -179,7 +184,14 @@ function App() {
     if (result) {
       command.score += score;
       command.correctAnswers++;
+
+      setToastHeader('Правильный ответ!');
+      setToastTitle(`${command.name} ответила на ${command.score} баллов!`);
+    } else {
+      setToastHeader('Неправильный ответ!');
+      setToastTitle(`${command.name} ответила неправильно:(`);
     }
+    setShowToast(true);
     setCommands(copyCommands)
 
     const total = totalQuestions();
@@ -265,6 +277,31 @@ function App() {
           }}
         />
       </div>
+
+      <div
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          zIndex: 1050, // выше модалок и прочего
+        }}
+      >
+        <Toast onClose={() => setShowToast(false)}
+          show={showToast} delay={3000} autohide
+        >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">{toastHeader}</strong>
+            <small></small>
+          </Toast.Header>
+          <Toast.Body>{toastTitle}</Toast.Body>
+        </Toast>
+      </div>
+
       <BottomPanel visible={!commandsSplashVisible}
         showQuestion={showQuestion}
         isAnswerAllowClose={isAnswerAllowClose}
